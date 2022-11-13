@@ -11,6 +11,10 @@ public class PlayerAnimation : MonoBehaviour {
     private Animator _animator;
     private Transform _transform;
 
+    /** Currently facing:
+        f = front, b = back
+        l = right, r = right
+    **/
     private char _currentlyFacing;
     public bool left;
 
@@ -44,36 +48,40 @@ public class PlayerAnimation : MonoBehaviour {
                     setMaterial("IdleBack");
                     break;
             }
-
-
         }
-        left = false;
+
         if(horizontal > 0) {
+            setMaterial("RunSide");
             _animator.Play("RunSide");
             _transform.localEulerAngles = new Vector3(0, 0, 0);
-            setMaterial("RunSide");
             _currentlyFacing = 'r';
 
         } else if(horizontal < 0) {
+            setMaterial("RunSide");
             _animator.Play("RunSide");
             _transform.localEulerAngles = new Vector3(0, 180, 0);
-            setMaterial("RunSide");
             _currentlyFacing = 'l';
-            left = true;
 
         } else if(vertical > 0) {
-            _animator.Play("RunBack");
             setMaterial("RunBack");
+            _animator.Play("RunBack");
             _currentlyFacing = 'b';
 
         } else if(vertical < 0) {
-            _animator.Play("RunFront");
             setMaterial("RunFront");
+            _animator.Play("RunFront");
             _currentlyFacing = 'f';
+        }
+
+
+        if(_currentlyFacing.CompareTo((char)'l') == 0) {
+            left = true;
+        } else if(_currentlyFacing.CompareTo((char)'r') == 0) {
+            left = false;
         }
     }
 
     void setMaterial(string materialName) {
-       // spriteRenderer.material = materials.Where(obj => obj.name == materialName).SingleOrDefault();
+        spriteRenderer.material = materials.Where(obj => obj.name == materialName).SingleOrDefault();
     }
 }
