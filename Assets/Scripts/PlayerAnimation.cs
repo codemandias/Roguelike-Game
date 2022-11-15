@@ -65,11 +65,13 @@ public class PlayerAnimation : MonoBehaviour {
         } else if(vertical > 0) {
             setMaterial("RunBack");
             _animator.Play("RunBack");
+            _transform.localEulerAngles = new Vector3(0, 0, 0);
             _currentlyFacing = 'b';
 
         } else if(vertical < 0) {
             setMaterial("RunFront");
             _animator.Play("RunFront");
+            _transform.localEulerAngles = new Vector3(0, 0, 0);
             _currentlyFacing = 'f';
         }
 
