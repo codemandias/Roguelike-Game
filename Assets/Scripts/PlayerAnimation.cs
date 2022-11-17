@@ -11,14 +11,17 @@ public class PlayerAnimation : MonoBehaviour {
     private Animator _animator;
     private Transform _transform;
 
-    private char _currentlyFacing;
-    public bool left;
+    /** Currently facing:
+        f = front, b = back
+        l = right, r = right
+    **/
+    public char currentlyFacing;
 
     // Start is called before the first frame update
     void Start() {
         _animator = GetComponentInChildren<Animator>();
         _transform = transform;
-        _currentlyFacing = 'f';
+        currentlyFacing = 'd';
     }
 
     // Update is called once per frame
@@ -31,8 +34,8 @@ public class PlayerAnimation : MonoBehaviour {
         } else {
             _animator.SetBool("isRunning", false);
 
-            switch(_currentlyFacing) {
-                case 'f': setMaterial("IdleFront");
+            switch(currentlyFacing) {
+                case 'd': setMaterial("IdleFront");
                     break;
                 case 'l':
                     setMaterial("IdleSide");
@@ -40,40 +43,39 @@ public class PlayerAnimation : MonoBehaviour {
                 case 'r':
                     setMaterial("IdleSide");
                     break;
-                case 'b':
+                case 'u':
                     setMaterial("IdleBack");
                     break;
             }
-
-
         }
-        left = false;
+
         if(horizontal > 0) {
+            setMaterial("RunSide");
             _animator.Play("RunSide");
             _transform.localEulerAngles = new Vector3(0, 0, 0);
-            setMaterial("RunSide");
-            _currentlyFacing = 'r';
+            currentlyFacing = 'r';
 
         } else if(horizontal < 0) {
+            setMaterial("RunSide");
             _animator.Play("RunSide");
             _transform.localEulerAngles = new Vector3(0, 180, 0);
-            setMaterial("RunSide");
-            _currentlyFacing = 'l';
-            left = true;
+            currentlyFacing = 'l';
 
         } else if(vertical > 0) {
-            _animator.Play("RunBack");
             setMaterial("RunBack");
-            _currentlyFacing = 'b';
+            _animator.Play("RunBack");
+            _transform.localEulerAngles = new Vector3(0, 0, 0);
+            currentlyFacing = 'u';
 
         } else if(vertical < 0) {
-            _animator.Play("RunFront");
             setMaterial("RunFront");
-            _currentlyFacing = 'f';
+            _animator.Play("RunFront");
+            _transform.localEulerAngles = new Vector3(0, 0, 0);
+            currentlyFacing = 'd';
         }
     }
 
     void setMaterial(string materialName) {
-       // spriteRenderer.material = materials.Where(obj => obj.name == materialName).SingleOrDefault();
+        spriteRenderer.material = materials.Where(obj => obj.name == materialName).SingleOrDefault();
     }
 }
