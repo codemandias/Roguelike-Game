@@ -218,11 +218,11 @@ GameObject:
   - component: {fileID: 268496272}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &268496272
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 399181228}
   m_Layer: 0
   m_Name: minimare_robot-002_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +439,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 977733996}
+  health: 3
+--- !u!1 &501493198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501493199}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &501493199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501493198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 977733996}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,11 +640,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &787272729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2117244286953259271, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &787272732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787272729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65745805c6d01142a1e86e46a4359a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &977733995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8873191988365035194, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
   m_PrefabInstance: {fileID: 8075254439291245320}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &977733996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8873191988365035198, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &977734000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977733995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b285f87611cfb4dba7d82b8c9ccb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 9081409515151931137, guid: a2a010bb043f5d646b0515a976ad8dc1, type: 3}
+  firePosition: {fileID: 501493199}
+  force: 10
 --- !u!1 &1381613474
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,7 +927,7 @@ GameObject:
   - component: {fileID: 1561163594}
   m_Layer: 0
   m_Name: Border
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28494,7 +28564,7 @@ GameObject:
   - component: {fileID: 1765387765}
   m_Layer: 0
   m_Name: minimare-001_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28625,7 +28695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 8075254439291245321}
+  health: 3
 --- !u!1 &1791820958
 GameObject:
   m_ObjectHideFlags: 0
@@ -28641,7 +28712,7 @@ GameObject:
   - component: {fileID: 1791820963}
   m_Layer: 0
   m_Name: dark_minimare-001_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28772,7 +28843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 977733996}
+  health: 3
 --- !u!1 &1902773737
 GameObject:
   m_ObjectHideFlags: 0
@@ -29717,6 +29789,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_Size.x
+      value: 0.43593758
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_Size.y
+      value: 1.8313985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.03203371
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.16310413
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084292050243896624, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2527623712955990590, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
       propertyPath: m_Intensity
       value: 0.7
@@ -29785,5 +29881,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.49
       objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483963, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: projectileAbility
+      value: 
+      objectReference: {fileID: 977734000}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+--- !u!4 &8075254439291245321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8873191986646483962, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
