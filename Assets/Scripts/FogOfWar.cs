@@ -9,32 +9,51 @@ public class FogOfWar : MonoBehaviour {
     public const float MIN_ANGLE = 0.1f;
     public GameObject quad;
 
-    void FixedUpdate() {
+    private void Start() {
+        quad.transform.localScale = new Vector3(sightDistance, sightDistance, -1);
+    }
+
+    void Update() {
         int layerMask = 1 << 6;
 
         if(angle <= MIN_ANGLE) {
             return;
         }
 
+        // Number of vertices around the outside of the polygon (Not including middle vertex)
         int numberOfVertices = (int)Mathf.Floor(360 / angle);
 
+        // Vertices and Triangles for the polygon
         Vector3[] lightVertices = new Vector3[numberOfVertices + 1];
         int[] lightTriangles = new int[numberOfVertices * 3];
 
+        // First vertex is the very center of the polygon
         lightVertices[0] = new Vector2(0, 0);
 
-        for(int i = 1; i < numberOfVertices; i++) {
-            lightVertices[i] = Quaternion.AngleAxis(angle * i, Vector3.forward) * Vector3.right;
+        for(int i = 1; i < numberOfVertices + 1; i++) {
+            // Cast a ray in each direction and find if it hits a wall
+            Vector3 dir = Quaternion.AngleAxis(angle * i - 1, Vector3.forward) * Vector3.right;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir.normalized, sightDistance, layerMask);
+
+            // If it hits a wall, move the vertex to the ray hit position
+            if(hit.collider != null) {
+                lightVertices[i] = (Quaternion.AngleAxis(angle * i, Vector3.forward) * Vector3.right) * hit.fraction;
+            }
+            // If it does not hit a wall, move the vertex to sight distance
+            else {
+                lightVertices[i] = Quaternion.AngleAxis(angle * i, Vector3.forward) * Vector3.right;
+            }
         }
 
-        lightVertices[numberOfVertices] = new Vector2(1, 0);
-
+        // The first triangle is calculated separately
         lightTriangles[0] = 0;
         lightTriangles[1] = 1;
         lightTriangles[2] = 2;
 
+        // The amount to subtract to get the correct vertex
         int sub = 0;
 
+        // Calculate each triangle of the polygon
         for(int i = 3; i < lightTriangles.Length; i+=3) {
             lightTriangles[i] = 0;
             lightTriangles[i + 1] = lightTriangles[i-1];
@@ -49,10 +68,5 @@ public class FogOfWar : MonoBehaviour {
         mesh.triangles = lightTriangles;
 
         quad.GetComponent<MeshFilter>().mesh = mesh;
-
-        for(int i = 0; i < numberOfVertices - 1; i++) {
-            Vector3 dir = Quaternion.AngleAxis(angle*i, Vector3.forward) * Vector3.right;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir.normalized, sightDistance, layerMask);
-        }
     }
 }
