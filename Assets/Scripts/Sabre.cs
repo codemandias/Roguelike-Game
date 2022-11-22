@@ -53,10 +53,9 @@ public class Sabre : MonoBehaviour {
 
             switch(playerAnimation.currentlyFacing) {
                 case 'l':
-                    sabreRenderer.flipX = true;
                     weaponX = -0.2f;
-                    swingSpeed = 7;
-                    startDegree = 0;
+                    swingSpeed = -7;
+                    startDegree = 180;
                     break;
                 case 'r':
                     swingSpeed = -7;
@@ -78,17 +77,6 @@ public class Sabre : MonoBehaviour {
             }
 
             currentDegree = startDegree;
-
-            /*
-                    if(player.GetComponent<PlayerAnimation>().left) {
-                        sabreRenderer.flipX = true;
-                        weaponX = -0.3f;
-                    } else {
-                        sabreRenderer.flipX = false;
-                        weaponY = 0f;
-                        weaponX = 0f;
-                    }*/
-
 
             pos = player.transform.position;
             pos.x += weaponX;
