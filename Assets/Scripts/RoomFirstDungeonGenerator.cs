@@ -122,6 +122,12 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             }
             //Add the vertical path of the corridor
             corridor.Add(position);
+
+            Vector2Int left = position; left.x -= 1;
+            Vector2Int right = position; right.x += 1;
+            corridor.Add(position);
+            corridor.Add(left);
+            corridor.Add(right);
         }
         //While the x position of the current center does not match with the destination,
         //move the x position accordingly
@@ -138,7 +144,11 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                 position += Vector2Int.left;
             }
             //Add the horizontal path of the corridor
+            Vector2Int up = position; up.y += 1;
+            Vector2Int down = position; down.y -= 1;
             corridor.Add(position);
+            corridor.Add(up);
+            corridor.Add(down);
         }
         return corridor;
     }
