@@ -9,6 +9,7 @@ public class EnemyControl : MonoBehaviour
     private float minDistance = 5.0f;
     private bool targetCollision = false;
     private float speed = 2.0f;
+    public int health = 3;
 
 
 
@@ -18,6 +19,11 @@ public class EnemyControl : MonoBehaviour
 
     void Update()
     {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         range = Vector2.Distance(transform.position, target.position);
         if (range < minDistance)
         {
@@ -60,6 +66,11 @@ public class EnemyControl : MonoBehaviour
     {
         targetCollision = false;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+    }
+
+    public void Damage(int damage)
+    {
+        health -= damage;
     }
 
 }

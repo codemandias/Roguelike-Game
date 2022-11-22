@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator _animator; 
     private Transform _transform;
+    public ProjectileAbility projectileAbility;
     
     // Start is called before the first frame update
     void Start() {
@@ -21,6 +22,10 @@ public class PlayerMovement : MonoBehaviour {
 
         if(horizontal != 0 || vertical != 0) {
             _transform.transform.Translate(new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0), Space.World);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            projectileAbility.shootProjectile();
         }
     }
 }

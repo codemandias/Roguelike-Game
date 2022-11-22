@@ -218,11 +218,11 @@ GameObject:
   - component: {fileID: 268496272}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &268496272
 Transform:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ Transform:
   - {fileID: 1791820960}
   - {fileID: 399181224}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315136612
 GameObject:
@@ -291,7 +291,7 @@ Transform:
   - {fileID: 1732700199}
   - {fileID: 747616289}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399181223
 GameObject:
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 399181228}
   m_Layer: 0
   m_Name: minimare_robot-002_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +348,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7a1a22530332db24da7e98a23bd4a298, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -439,7 +439,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 8075254439291245321}
+  health: 3
+--- !u!1 &501493198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501493199}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &501493199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501493198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +555,7 @@ Transform:
   m_Children:
   - {fileID: 937371969}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747616288
 GameObject:
@@ -946,7 +978,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1561163590
 GameObject:
@@ -964,7 +996,7 @@ GameObject:
   - component: {fileID: 1561163594}
   m_Layer: 6
   m_Name: Border
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28535,7 +28567,7 @@ GameObject:
   - component: {fileID: 1765387765}
   m_Layer: 0
   m_Name: minimare-001_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28575,7 +28607,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7a1a22530332db24da7e98a23bd4a298, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28666,7 +28698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 8075254439291245321}
+  health: 3
 --- !u!1 &1791820958
 GameObject:
   m_ObjectHideFlags: 0
@@ -28682,7 +28715,7 @@ GameObject:
   - component: {fileID: 1791820963}
   m_Layer: 0
   m_Name: dark_minimare-001_7
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28707,7 +28740,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7a1a22530332db24da7e98a23bd4a298, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28813,7 +28846,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013bd9299523251418006137bc04c6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 8075254439291245321}
+  health: 3
 --- !u!1 &1902773737
 GameObject:
   m_ObjectHideFlags: 0
@@ -29744,7 +29778,7 @@ RectTransform:
   m_Children:
   - {fileID: 1381613475}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29886,5 +29920,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483963, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: projectileAbility
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+--- !u!4 &8075254439291245321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8873191986646483962, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
