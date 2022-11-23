@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     public int health = 3;
+    public int statusEffect;
     void Start()
     {
         
@@ -23,4 +24,17 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
     }
+
+    public void shockDamage(int damage)
+    {
+        health -= damage;
+        transform.Find("shockEffect").gameObject.SetActive(true);
+        Invoke("Recover", 3f);
+    }
+
+    public void Recover()
+    {
+        transform.Find("shockEffect").gameObject.SetActive(false);
+    }
+
 }

@@ -9,7 +9,7 @@ public class EnemyControl : MonoBehaviour
     private float minDistance = 5.0f;
     private bool targetCollision = false;
     private float speed = 2.0f;
-    public int health = 3;
+    public int health = 5;
 
 
 
