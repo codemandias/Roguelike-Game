@@ -382,6 +382,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &359789335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8873191986646483957, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &399181223
 GameObject:
   m_ObjectHideFlags: 0
@@ -30206,6 +30211,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483957, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483960, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8873191986646483962, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -30281,3 +30294,16 @@ MonoBehaviour:
   projectile: {fileID: 9081409515151931137, guid: a2a010bb043f5d646b0515a976ad8dc1, type: 3}
   firePosition: {fileID: 501493199}
   force: 10
+--- !u!114 &8075254439291245331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359789335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc3b21605305c5458fb94c9a163fb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
