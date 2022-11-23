@@ -71,6 +71,13 @@ public class EnemyControl : MonoBehaviour
     public void Damage(int damage)
     {
         health -= damage;
+        transform.GetChild(0).gameObject.SetActive(true);
+        Invoke("Recover", 0.25f);
+    }
+
+    void Recover()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
 }
