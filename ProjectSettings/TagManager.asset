@@ -7,6 +7,8 @@ TagManager:
   - Weapon
   - Border
   - Enemy
+  - Item
+  - BotEnemy
   layers:
   - Default
   - TransparentFX

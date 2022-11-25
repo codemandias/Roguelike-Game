@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShockSerpent : MonoBehaviour
+public class ForceField : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,6 @@ public class ShockSerpent : MonoBehaviour
     {
         
     }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -29,18 +27,11 @@ public class ShockSerpent : MonoBehaviour
             bool top = contactPoint.y > center.y;
             bool bottom = contactPoint.y < center.y;
 
-            if (left) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right, ForceMode2D.Impulse);
-            if (right) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.right, ForceMode2D.Impulse);
-            if (bottom) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up, ForceMode2D.Impulse);
-            if (top) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up, ForceMode2D.Impulse);
+            if (left) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * 2.0f, ForceMode2D.Force);
+            if (right) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.right * 2.0f, ForceMode2D.Force);
+            if (bottom) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 2.0f, ForceMode2D.Force);
+            if (top) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * 2.0f, ForceMode2D.Force);
             collision.gameObject.GetComponent<PlayerHealth>().shockDamage(1);
         }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
     }
-
-
 }
