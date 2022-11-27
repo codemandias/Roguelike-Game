@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Large_Level
   m_EditorClassIdentifier: 
   iterations: 20
-  walkLength: 20
-  startRandomly: 1
+  walkLength: 10
+  startRandomly: 0

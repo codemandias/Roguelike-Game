@@ -15,7 +15,7 @@ Date Accessed: November 16th, 2022
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField] private Tilemap floorTilemap, wallTilemap;
-    [SerializeField] private TileBase floorTile, wallTop;
+    [SerializeField] private TileBase[] floorTile, wallTop;
     [SerializeField] private Grid grid;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPos)
@@ -23,11 +23,11 @@ public class TilemapVisualizer : MonoBehaviour
         PaintTiles(floorPos, floorTilemap, floorTile);
     }
 
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase[] tile)
     {
         foreach (var position in positions)
         {
-            PaintSingleTile(tilemap, tile, position);
+            PaintSingleTile(tilemap, tile[Random.Range(0,tile.Length-1)], position);
         }      
     }
 
@@ -43,7 +43,7 @@ public class TilemapVisualizer : MonoBehaviour
 
     internal void PaintSingleBasicWall(Vector2Int position)
     {
-        PaintSingleTile(wallTilemap, wallTop, position);
+        PaintSingleTile(wallTilemap, wallTop[Random.Range(0, wallTop.Length - 1)], position);
     }
 
     public void Clear()
