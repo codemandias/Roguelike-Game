@@ -13,19 +13,16 @@ Date Accessed: November 16th, 2022
 
 //This can contain different algorithms for generating random dungeons
 
-public static class ProceduralGenerationAlgorithms
-{
+public static class ProceduralGenerationAlgorithms {
     //Using a HashSet will allow us to prevent duplicates using Union With
-    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPos, int walkLength)
-    {
+    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPos, int walkLength) {
         //Create a HashSet to store out positions
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();
         //Add the start position to our HashSet
         path.Add(startPos);
         //Create a variable for the previous position, and initialize it with the start position
         var previousPos = startPos;
-        for (int i = 0; i < walkLength; i++)
-        {
+        for(int i = 0; i < walkLength; i++) {
             //Move one spot in a cardinal direction from our current (previousPos) position
             var newPos = previousPos + Direction2D.GetRandomDirection();
             //Add the new position to our HashSet
@@ -39,8 +36,7 @@ public static class ProceduralGenerationAlgorithms
 
     //Choose a random direction from the last position of the path, startPos, and walks in that direction for a given length of corridorLength
     //Use a list to keeo track of the last position added
-    public static List<Vector2Int> RandomCorridor(Vector2Int startPos, int corridorLength)
-    {
+    public static List<Vector2Int> RandomCorridor(Vector2Int startPos, int corridorLength) {
         //Create a list to store the positions of our corridor
         List<Vector2Int> corridor = new List<Vector2Int>();
         //Choose a random cardinal direction
@@ -50,8 +46,7 @@ public static class ProceduralGenerationAlgorithms
         //Add the start position of the corridor to the list
         corridor.Add(currentPos);
 
-        for (int i = 0; i < corridorLength; i++)
-        {
+        for(int i = 0; i < corridorLength; i++) {
             //Update the current position
             currentPos += direction;
             //Add the position to the corridor list
@@ -61,8 +56,7 @@ public static class ProceduralGenerationAlgorithms
     }
 
     //Continually split the spaces of a room until they fall under a certain minimum dimension
-    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
-    {
+    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight) {
         //Create a new queue to track our rooms
         Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
         //Create a list to save the split rooms
@@ -70,51 +64,41 @@ public static class ProceduralGenerationAlgorithms
         //Add the spaceToSplit to the queue
         roomsQueue.Enqueue(spaceToSplit);
         //while the roomsQueue is larger than zero perform a split
-        while (roomsQueue.Count > 0)
-        {
+        while(roomsQueue.Count > 0) {
             //Create variable for a room
             var room = roomsQueue.Dequeue();
             //split rooms that are larger than the minimum width and height
-            if (room.size.y >= minHeight && room.size.x >= minWidth)
-            {
+            if(room.size.y >= minHeight && room.size.x >= minWidth) {
                 //Randomly split the room horizontally or vertically
                 //if random value is less than 0.5 than a possible horizontal split will be checked first
-                if (Random.value < 0.5f)
-                {
+                if(Random.value < 0.5f) {
                     //Check if room can be split horizontally
-                    if (room.size.y >= minHeight * 2)
-                    {
+                    if(room.size.y >= minHeight * 2) {
                         SplitHorizontally(minHeight, roomsQueue, room);
                     }
                     //Check if room can be split vertically
-                    else if (room.size.x >= minWidth * 2)
-                    {
+                    else if(room.size.x >= minWidth * 2) {
                         SplitVertically(minWidth, roomsQueue, room);
                     }
                     //Area can't be split, but it can contain a room
-                    else if (room.size.x >= minWidth && room.size.y >= minHeight)
-                    {
+                    else if(room.size.x >= minWidth && room.size.y >= minHeight) {
                         //Add the room to the room list
                         roomsList.Add(room);
                     }
                 }
                 //if the random value was larger than 0.5 then we will check for a vertical split first
-                else
-                {
+                else {
 
                     //Check if room can be split vertically
-                    if (room.size.x >= minWidth * 2)
-                    {
+                    if(room.size.x >= minWidth * 2) {
                         SplitVertically(minWidth, roomsQueue, room);
                     }
                     //Check if room can be split horizontally
-                    else if (room.size.y >= minHeight * 2)
-                    {
+                    else if(room.size.y >= minHeight * 2) {
                         SplitHorizontally(minHeight, roomsQueue, room);
                     }
                     //Area can't be split, but it can contain a room
-                    else if (room.size.x >= minWidth && room.size.y >= minHeight)
-                    {
+                    else if(room.size.x >= minWidth && room.size.y >= minHeight) {
                         //Add the room to the room list
                         roomsList.Add(room);
                     }
@@ -125,8 +109,7 @@ public static class ProceduralGenerationAlgorithms
     }
 
     //Split the room horizontally along a random point on the y-axis
-    private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
-    {
+    private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room) {
         //Variable for the random split along the y axis
         var ySplit = Random.Range(1, room.size.y);
         //Bounds for first room after the split
@@ -140,8 +123,7 @@ public static class ProceduralGenerationAlgorithms
     }
 
     //Split the room vertically along a random point on the x-axis
-    private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
-    {
+    private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room) {
         //Variable for the random split along the x axis
         var xSplit = Random.Range(1, room.size.x);
         //Bounds of first room after the split
@@ -155,8 +137,7 @@ public static class ProceduralGenerationAlgorithms
     }
 }
 
-public static class Direction2D
-{
+public static class Direction2D {
     //Create a list that will contain the list of cardinal directions
     public static List<Vector2Int> cardinalDirections = new List<Vector2Int>
         {
@@ -168,8 +149,7 @@ public static class Direction2D
 
     //Method to get a random cardinal direction from out cardinalDirections list
     //picks a random int between 0 and the last position of the cardinalDirections list
-    public static Vector2Int GetRandomDirection()
-    {
+    public static Vector2Int GetRandomDirection() {
         return cardinalDirections[Random.Range(0, cardinalDirections.Count)];
     }
 }
