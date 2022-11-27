@@ -28,6 +28,13 @@ public class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<EnemyControl>().Damage(1);
                 Destroy(gameObject);
                 break;
+            case "BotEnemy":
+                collision.gameObject.GetComponent<SpaceBot>().Damage(1);
+                Destroy(gameObject);
+                break;
+            case "Item":
+                Destroy(gameObject);
+                break;
         }
         Destroy(gameObject,0.5f);
     }

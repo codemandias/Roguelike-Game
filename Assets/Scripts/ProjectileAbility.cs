@@ -7,7 +7,7 @@ public class ProjectileAbility : MonoBehaviour
 
     public GameObject projectile;
     public Transform firePosition;
-    public float force;
+    public float force = 10.0f;
     private PlayerAnimation playerAnimation;
     // Start is called before the first frame update
     void Start()

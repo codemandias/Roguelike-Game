@@ -1,29 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyControl : MonoBehaviour
+public class SpaceBot : MonoBehaviour
 {
+
+    public float[] forceFieldSpeed = { 2.0f, -2.0f};
+    public Transform[] forceFields;
+    public float distance = 0.9f;
     public float range;
     public Transform target;
     public float minDistance = 5.0f;
     public bool targetCollision = false;
     public float speed = 2.0f;
     public int health = 5;
-
-
-
+    // Start is called before the first frame update
     void Start()
     {
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < forceFields.Length; i++) {
+            forceFields[i].position = transform.position + new Vector3(-Mathf.Cos(Time.time * forceFieldSpeed[i]) * distance, Mathf.Sin(Time.time * forceFieldSpeed[i]) * distance);
+        }
         if (health <= 0)
         {
             Destroy(gameObject);
         }
-        if (target != null) {
+        if (target != null)
+        {
             range = Vector2.Distance(transform.position, target.position);
             if (range < minDistance)
             {
@@ -59,27 +68,12 @@ public class EnemyControl : MonoBehaviour
             if (right) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.right * 2.0f, ForceMode2D.Impulse);
             if (bottom) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 2.0f, ForceMode2D.Impulse);
             if (top) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * 2.0f, ForceMode2D.Impulse);
-            Invoke("FalseCollision", 0.5f);
             collision.gameObject.GetComponent<PlayerHealth>().Damage(1);
         }
-    }
-
-    void FalseCollision()
-    {
-        targetCollision = false;
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     public void Damage(int damage)
     {
         health -= damage;
-        transform.GetChild(0).gameObject.SetActive(true);
-        Invoke("Recover", 0.25f);
     }
-
-    void Recover()
-    {
-        transform.GetChild(0).gameObject.SetActive(false);
-    }
-
 }
