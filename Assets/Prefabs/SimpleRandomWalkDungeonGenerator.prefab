@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4228860676535613340}
   - component: {fileID: 5746253261359338898}
   m_Layer: 0
-  m_Name: RandomWalkDungeonGenerator
+  m_Name: SimpleRandomWalkDungeonGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemapVisualizer: {fileID: 0}
   startPos: {x: 0, y: 0}
-  randomWalkParameters: {fileID: 11400000, guid: e6c0c198bacdda94ead400c9d2625fdd, type: 2}
+  randomWalkParameters: {fileID: 11400000, guid: 1c6db2294eb2ff74ebc1b00a35b90f5c, type: 2}
+  numberOfRooms: 3

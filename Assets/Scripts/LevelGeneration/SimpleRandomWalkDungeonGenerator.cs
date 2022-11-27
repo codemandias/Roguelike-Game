@@ -16,13 +16,23 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
     //Number of times we want to run our algorithm
     [SerializeField] protected SimpleRandomWalkData randomWalkParameters;
+    [SerializeField] private int numberOfRooms;
+    private HashSet<Vector2Int> floorPos = new HashSet<Vector2Int>();
+
 
     //Method where we run the procedoural generation
-    protected override void RunProceduralGeneration()
-    {
-        HashSet<Vector2Int> floorPos = RunRandomWalk(randomWalkParameters, startPos);
+    protected override void RunProceduralGeneration() {
         //Clear previously generated floor
         tilemapVisualizer.Clear();
+
+        Vector2Int movingStartPos = startPos;
+
+        for(int i = 0; i < numberOfRooms; i++) {
+            RunRandomWalk(randomWalkParameters, movingStartPos);
+
+            movingStartPos.Set(movingStartPos.x + Random.Range(-2,3) * randomWalkParameters.walkLength, movingStartPos.y + Random.Range(-2, 3) * randomWalkParameters.walkLength);
+        }
+        
         tilemapVisualizer.PaintFloorTiles(floorPos);
         WallGenerator.CreateWalls(floorPos, tilemapVisualizer);
     }
@@ -32,7 +42,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
         //Create a variable for the current position of the walk and initialize to the start position
         var currentPos = position;
         //Create a HashSet for our floor positions
-        HashSet<Vector2Int> floorPos = new HashSet<Vector2Int>();
+/*        HashSet<Vector2Int> floorPos = new HashSet<Vector2Int>();*/
         for (int i = 0; i < parameters.iterations; i++)
         {
             //Create a path using our simlpe random walk algorithm

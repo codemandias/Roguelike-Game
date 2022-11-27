@@ -25,8 +25,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     //This will determine the amount of space between rooms
     //Setting to zero will allow for rooms to connect to one another through the floors
     [SerializeField][Range(0, 10)] private int offset = 1;
-    //If we want to generate square rooms or random shaped rooms
-    [SerializeField] private bool randomWalkRooms = false;
 
     protected override void RunProceduralGeneration()
     {
