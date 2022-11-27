@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  projectileAbility: {fileID: 0}
 --- !u!61 &8873191986646483961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -435,9 +436,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fbd14574393c04dbb84eae8c87372d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
+  sightQuad: {fileID: 1829981610}
+  shadowQuad: {fileID: 0}
   sightDistance: 5
   angle: 1
-  quad: {fileID: 1829981610}
 --- !u!1 &8873191987369303675
 GameObject:
   m_ObjectHideFlags: 0

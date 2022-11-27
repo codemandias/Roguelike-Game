@@ -1,38 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
 public class FogOfWar : MonoBehaviour {
-    public float sightDistance;
-    public float angle = 15;
-    public const float MIN_ANGLE = 0.1f;
-    public GameObject quad;
+    public bool isActive;
+
+    private const float MIN_ANGLE = 0.1f;
+
+    [SerializeField] private GameObject sightQuad;
+    [SerializeField] private GameObject shadowQuad;
+    [SerializeField] private float sightDistance;
+    [SerializeField, Min(MIN_ANGLE)] private float angle = 15;
 
     private void Start() {
-        quad.transform.localScale = new Vector3(sightDistance, sightDistance, -1);
+        sightQuad.transform.localScale = new Vector3(sightDistance, sightDistance, -1);
     }
 
     void Update() {
-        if(angle <= MIN_ANGLE) {
-            return;
+        if(angle < MIN_ANGLE) {
+            angle = MIN_ANGLE;
         }
 
-        int layerMask = 1 << 6;
-        
-        // Number of vertices around the outside of the polygon (Not including middle vertex)
-        int numberOfVertices = (int)Mathf.Floor(360 / angle);
+        sightQuad.SetActive(isActive);
+        shadowQuad.SetActive(isActive);
 
-        // Vertices and Triangles for the polygon
-        Vector3[] lightVertices = getVertices(numberOfVertices, layerMask);
-        int[] lightTriangles = getTriangles(numberOfVertices);
+        if(isActive) {
+            int layerMask = 1 << 6;
 
-        // Create a new mesh using the found vertices and triangles
-        Mesh mesh = new Mesh();
-        mesh.vertices = lightVertices;
-        mesh.triangles = lightTriangles;
+            // Number of vertices around the outside of the polygon (Not including middle vertex)
+            int numberOfVertices = (int)Mathf.Floor(360 / angle);
 
-        quad.GetComponent<MeshFilter>().mesh = mesh;
+            // Vertices and Triangles for the polygon
+            Vector3[] lightVertices = getVertices(numberOfVertices, layerMask);
+            int[] lightTriangles = getTriangles(numberOfVertices);
+
+            // Create a new mesh using the found vertices and triangles
+            Mesh mesh = new Mesh();
+            mesh.vertices = lightVertices;
+            mesh.triangles = lightTriangles;
+
+            sightQuad.GetComponent<MeshFilter>().mesh = mesh;
+        }
     }
 
     Vector3[] getVertices(int numberOfVertices, int layerMask) {
