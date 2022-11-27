@@ -14,18 +14,29 @@ public class FogOfWar : MonoBehaviour {
     }
 
     void Update() {
-        int layerMask = 1 << 6;
-
         if(angle <= MIN_ANGLE) {
             return;
         }
 
+        int layerMask = 1 << 6;
+        
         // Number of vertices around the outside of the polygon (Not including middle vertex)
         int numberOfVertices = (int)Mathf.Floor(360 / angle);
 
         // Vertices and Triangles for the polygon
+        Vector3[] lightVertices = getVertices(numberOfVertices, layerMask);
+        int[] lightTriangles = getTriangles(numberOfVertices);
+
+        // Create a new mesh using the found vertices and triangles
+        Mesh mesh = new Mesh();
+        mesh.vertices = lightVertices;
+        mesh.triangles = lightTriangles;
+
+        quad.GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    Vector3[] getVertices(int numberOfVertices, int layerMask) {
         Vector3[] lightVertices = new Vector3[numberOfVertices + 1];
-        int[] lightTriangles = new int[numberOfVertices * 3];
 
         // First vertex is the very center of the polygon
         lightVertices[0] = new Vector2(0, 0);
@@ -45,7 +56,13 @@ public class FogOfWar : MonoBehaviour {
             }
         }
 
-        // The first triangle is calculated separately
+        return lightVertices;
+    }
+
+    int[] getTriangles(int numberOfVertices) {
+        int[] lightTriangles = new int[numberOfVertices * 3];
+
+        // The first triangle is calculated separately as it has a different pattern
         lightTriangles[0] = 0;
         lightTriangles[1] = 1;
         lightTriangles[2] = 2;
@@ -54,19 +71,14 @@ public class FogOfWar : MonoBehaviour {
         int sub = 0;
 
         // Calculate each triangle of the polygon
-        for(int i = 3; i < lightTriangles.Length; i+=3) {
+        for(int i = 3; i < lightTriangles.Length; i += 3) {
             lightTriangles[i] = 0;
-            lightTriangles[i + 1] = lightTriangles[i-1];
+            lightTriangles[i + 1] = lightTriangles[i - 1];
             lightTriangles[i + 2] = i - sub <= numberOfVertices ? i - sub : 1;
 
-            sub+=2;
+            sub += 2;
         }
 
-
-        Mesh mesh = new Mesh();
-        mesh.vertices = lightVertices;
-        mesh.triangles = lightTriangles;
-
-        quad.GetComponent<MeshFilter>().mesh = mesh;
+        return lightTriangles;
     }
 }
