@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SpaceBot : MonoBehaviour
 {
@@ -16,15 +17,21 @@ public class SpaceBot : MonoBehaviour
     public float speed = 2.0f;
     public int health = 5;
     public ProjectileAbility projectileAbility;
+    private Animator anim;
+    private Rigidbody rb;
+    private Vector3 lastPosition;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Adding a forcefield around the bot
         for (int i = 0; i < forceFields.Length; i++) {
             forceFields[i].position = transform.position + new Vector3(-Mathf.Cos(Time.time * forceFieldSpeed[i]) * distance, Mathf.Sin(Time.time * forceFieldSpeed[i]) * distance);
         }
@@ -44,12 +51,17 @@ public class SpaceBot : MonoBehaviour
                     transform.LookAt(target.position);
 
                     // Correct the rotation
+                    lastPosition = transform.position;
                     transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                     transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                    Vector3 direction = transform.position - lastPosition;
+                    anim.SetFloat("X", direction.x);
+                    anim.SetFloat("Y", direction.y);
                 }
             }
             transform.rotation = Quaternion.identity;
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
