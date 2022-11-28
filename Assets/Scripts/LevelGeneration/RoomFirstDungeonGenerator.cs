@@ -74,38 +74,37 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
     private BoundsInt createStartingRoom() {
         BoundsInt startingRoom = new BoundsInt();
-        int size = 25;
-
+        int roomSize = 25;
+        startingRoom.size = new Vector3Int(roomSize, roomSize, 1);
 
         // Start room center will always be at 0,0
-        startingRoom.size = new Vector3Int(size, size, 1);
         startingRoom.x = -startingRoom.size.x / 2;
         startingRoom.y = -startingRoom.size.y / 2;
 
         // Update the tilemap visualizer with the number of tiles in the start room
-        tilemapVisualizer.numStartRoomTiles = (int)Mathf.Pow(size - (offset * 2), 2);
+        tilemapVisualizer.numStartRoomTiles = (int)Mathf.Pow(roomSize - (offset * 2), 2);
 
         return startingRoom;
     }
 
     private BoundsInt createBossRoom() {
         BoundsInt bossRoom = new BoundsInt();
-        int size = 40;
 
-        bossRoom.size = new Vector3Int(size, size, 1);
+        int roomSize = 40;
+        bossRoom.size = new Vector3Int(roomSize, roomSize, 1);
 
-        // Boss room will appear at each cardinal direction extreme, or the in betweens (N, NE, E, SE, etc.)
-
+        // Finding the center of the level
         int centerX = -bossRoom.size.x / 2;
         int centerY = -bossRoom.size.y / 2;
 
+        // Find which direction is closest to most of the level
         Vector2Int direction = getDirectionFromStartingPoint();
 
         bossRoom.x = centerX + (bossRoom.size.x * direction.x * 3) + (dungeonWidth / 2) * direction.x;
         bossRoom.y = centerY + (bossRoom.size.y * direction.y * 3) + (dungeonHeight / 2) * direction.y;
 
         // Update the tilemap visualizer with the number of tiles in the boss room
-        tilemapVisualizer.numBossRoomTiles = (int)Mathf.Pow(size-(offset * 2), 2);
+        tilemapVisualizer.numBossRoomTiles = (int)Mathf.Pow(roomSize-(offset * 2), 2);
 
         return bossRoom;
     }
@@ -187,13 +186,20 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
                 position += Vector2Int.down;
             }
             //Add the vertical path of the corridor
+
+            
             corridor.Add(position);
 
+            // left, left2, right, right2 are to make the hallways wider
             Vector2Int left = position; left.x -= 1;
+            Vector2Int left2 = left; left2.x -= 1;
             Vector2Int right = position; right.x += 1;
+            Vector2Int right2 = right; right2.x += 1;
             corridor.Add(position);
             corridor.Add(left);
             corridor.Add(right);
+            corridor.Add(left2);
+            corridor.Add(right2);
         }
         //While the x position of the current center does not match with the destination,
         //move the x position accordingly
@@ -207,11 +213,16 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
                 position += Vector2Int.left;
             }
             //Add the horizontal path of the corridor
+            // Up, Up2, Down, Down2 are to make the hallways wider
             Vector2Int up = position; up.y += 1;
+            Vector2Int up2 = up; up2.y += 1;
             Vector2Int down = position; down.y -= 1;
+            Vector2Int down2 = down; down2.y += 1;
             corridor.Add(position);
             corridor.Add(up);
             corridor.Add(down);
+            corridor.Add(up2);
+            corridor.Add(down2);
         }
         return corridor;
     }

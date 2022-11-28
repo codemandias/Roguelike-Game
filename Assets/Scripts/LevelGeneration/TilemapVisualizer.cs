@@ -27,10 +27,16 @@ public class TilemapVisualizer : MonoBehaviour {
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap) {
         int index = 0;
         foreach(var position in positions) {
+
+            // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
             if(index < numBossRoomTiles) {
                 PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length - 1)], position);
+
+            // The next tiles in the list are for the boss room. Draw each one using the starting room tiles
             } else if(index < numBossRoomTiles + numStartRoomTiles) {
                 PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length - 1)], position);
+
+            // For all other rooms, use default tiles
             } else {
                 PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length - 1)], position);
             }
