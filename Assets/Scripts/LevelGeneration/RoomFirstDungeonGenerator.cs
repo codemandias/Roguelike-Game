@@ -12,7 +12,7 @@ Availability: https://www.youtube.com/watch?v=-QOCX6SVFsk&list=PLcRSafycjWFenI87
 Date Accessed: November 16th, 2022
 */
 
-public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator {
+public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     //Minimum width of a room in the dungeon
     [SerializeField] private int minRoomWidth = 4;
     //Minimum height of a room in the dungeon
@@ -31,14 +31,18 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator {
     }
 
     private void CreateRooms() {
+        startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
+
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
         roomsList.Add(createStartingRoom());
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
         floor = CreateSimpleRooms(roomsList);
+
         //Create a list to store the centers of each room created
         List<Vector2Int> roomCenters = new List<Vector2Int>();
+
         foreach(var room in roomsList) {
             //Add each rooms center to the roomCenters list
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
@@ -56,9 +60,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator {
 
     private BoundsInt createStartingRoom() {
         BoundsInt startingRoom = new BoundsInt();
-        startingRoom.x = 0;
-        startingRoom.y = 0;
-        startingRoom.size = new Vector3Int(25,25,1);
+        startingRoom.size = new Vector3Int(25, 25, 1);
+        startingRoom.x = -startingRoom.size.x / 2;
+        startingRoom.y = -startingRoom.size.y / 2;
 
         return startingRoom;
     }
