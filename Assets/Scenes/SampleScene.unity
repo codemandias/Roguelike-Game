@@ -1018,6 +1018,7 @@ MonoBehaviour:
   targetCollision: 0
   speed: 2
   health: 5
+  projectileAbility: {fileID: 950282208}
 --- !u!50 &572227784
 Rigidbody2D:
   serializedVersion: 4
@@ -1038,7 +1039,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &572227785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1189,6 +1190,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cbcd2dd386aa894eb456a1462e1e1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &950282205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8873191988365035194, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &950282208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 959892996017645282, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950282205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b285f87611cfb4dba7d82b8c9ccb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &950282212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950282205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42650bb9de7f9e342bc6aab0a24022d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: 9
 --- !u!1 &989311197
 GameObject:
   m_ObjectHideFlags: 0
@@ -29464,6 +29494,11 @@ MonoBehaviour:
   targetCollision: 0
   speed: 2
   health: 3
+--- !u!4 &1881984524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 501493199, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+  m_PrefabInstance: {fileID: 8075254439291245320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1984014357
 GameObject:
   m_ObjectHideFlags: 0
@@ -30602,6 +30637,18 @@ PrefabInstance:
       propertyPath: shadowQuad
       value: 
       objectReference: {fileID: 1396335528}
+    - target: {fileID: 8075254439291245326, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: mana
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075254439291245326, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 9081409515151931137, guid: a2a010bb043f5d646b0515a976ad8dc1, type: 3}
+    - target: {fileID: 8075254439291245326, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: firePosition
+      value: 
+      objectReference: {fileID: 1881984524}
     - target: {fileID: 8873191986646483957, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
       propertyPath: m_Name
       value: Player

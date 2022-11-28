@@ -23,22 +23,30 @@ public class ProjectileAbility : MonoBehaviour
     
     public void shootProjectile()
     {
-        GameObject searing_ray = Instantiate(projectile, firePosition.position, firePosition.rotation);
-        switch (playerAnimation.currentlyFacing)
-        {
-            case 'l':
-                searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.right * force, ForceMode2D.Impulse);
-                break;
-            case 'r':
-                searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.right * force, ForceMode2D.Impulse);
-                break;
-            case 'u':
-                searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.up * force, ForceMode2D.Impulse);
-                break;
-            case 'd':
-                searing_ray.GetComponent<Rigidbody2D>().AddForce(-firePosition.up * force, ForceMode2D.Impulse);
-                break;
+        if (this.GetComponent<PlayerMana>().mana > 0) {
+            this.GetComponent<PlayerMana>().ConsumeMana();
+            GameObject searing_ray = Instantiate(projectile, firePosition.position, firePosition.rotation);
+            switch (playerAnimation.currentlyFacing)
+            {
+                case 'l':
+                    searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.right * force, ForceMode2D.Impulse);
+                    break;
+                case 'r':
+                    searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.right * force, ForceMode2D.Impulse);
+                    break;
+                case 'u':
+                    searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.up * force, ForceMode2D.Impulse);
+                    break;
+                case 'd':
+                    searing_ray.GetComponent<Rigidbody2D>().AddForce(-firePosition.up * force, ForceMode2D.Impulse);
+                    break;
 
+            }
         }
+    }
+
+    public void GetManaFuel(int i)
+    {
+        this.GetComponent<PlayerMana>().RestoreMana(i);
     }
 }

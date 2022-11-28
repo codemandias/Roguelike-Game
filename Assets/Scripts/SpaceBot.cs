@@ -15,6 +15,7 @@ public class SpaceBot : MonoBehaviour
     public bool targetCollision = false;
     public float speed = 2.0f;
     public int health = 5;
+    public ProjectileAbility projectileAbility;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class SpaceBot : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            projectileAbility.GetManaFuel(3);
         }
         if (target != null)
         {
@@ -68,8 +70,15 @@ public class SpaceBot : MonoBehaviour
             if (right) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.right * 2.0f, ForceMode2D.Impulse);
             if (bottom) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 2.0f, ForceMode2D.Impulse);
             if (top) collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * 2.0f, ForceMode2D.Impulse);
+            Invoke("FalseCollision", 0.5f);
             collision.gameObject.GetComponent<PlayerHealth>().Damage(1);
         }
+    }
+
+    void FalseCollision()
+    {
+        targetCollision = false;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     public void Damage(int damage)
