@@ -12,27 +12,34 @@ Availability: https://www.youtube.com/watch?v=-QOCX6SVFsk&list=PLcRSafycjWFenI87
 Date Accessed: November 16th, 2022
 */
 
-public class TilemapVisualizer : MonoBehaviour
-{
+public class TilemapVisualizer : MonoBehaviour {
     [SerializeField] private Tilemap floorTilemap, wallTilemap;
-    [SerializeField] private TileBase[] floorTile, wallTop;
+    [SerializeField] private TileBase[] floorTile, wallTop, startTile, startWall, bossTile, bossWall;
     [SerializeField] private Grid grid;
 
-    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPos)
-    {
-        PaintTiles(floorPos, floorTilemap, floorTile);
+    public int numBossRoomTiles;
+    public int numStartRoomTiles;
+
+    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPos) {
+        PaintTiles(floorPos, floorTilemap);
     }
 
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase[] tile)
-    {
-        foreach (var position in positions)
-        {
-            PaintSingleTile(tilemap, tile[Random.Range(0,tile.Length-1)], position);
-        }      
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap) {
+        int index = 0;
+        foreach(var position in positions) {
+            if(index < numBossRoomTiles) {
+                PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length - 1)], position);
+            } else if(index < numBossRoomTiles + numStartRoomTiles) {
+                PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length - 1)], position);
+            } else {
+                PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length - 1)], position);
+            }
+
+            index++;
+        }
     }
 
-    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
-    {
+    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position) {
         grid.cellSize = new Vector2(1, 1);
         //Create a variable for the tile position, by converting a world position to a cell position
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
@@ -41,13 +48,11 @@ public class TilemapVisualizer : MonoBehaviour
         grid.cellSize = new Vector2(0.32f, 0.32f);
     }
 
-    internal void PaintSingleBasicWall(Vector2Int position)
-    {
+    internal void PaintSingleBasicWall(Vector2Int position) {
         PaintSingleTile(wallTilemap, wallTop[Random.Range(0, wallTop.Length - 1)], position);
     }
 
-    public void Clear()
-    {
+    public void Clear() {
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
     }

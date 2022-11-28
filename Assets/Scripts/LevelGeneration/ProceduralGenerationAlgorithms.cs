@@ -24,7 +24,7 @@ public static class ProceduralGenerationAlgorithms {
         var previousPos = startPos;
         for(int i = 0; i < walkLength; i++) {
             //Move one spot in a cardinal direction from our current (previousPos) position
-            var newPos = previousPos + Direction2D.GetRandomDirection();
+            var newPos = previousPos + Direction2D.GetRandomCardinalDirection();
             //Add the new position to our HashSet
             path.Add(newPos);
             //Update the previous position
@@ -40,7 +40,7 @@ public static class ProceduralGenerationAlgorithms {
         //Create a list to store the positions of our corridor
         List<Vector2Int> corridor = new List<Vector2Int>();
         //Choose a random cardinal direction
-        var direction = Direction2D.GetRandomDirection();
+        var direction = Direction2D.GetRandomCardinalDirection();
         //Create a variable for the current position
         var currentPos = startPos;
         //Add the start position of the corridor to the list
@@ -141,15 +141,15 @@ public static class Direction2D {
     //Create a list that will contain the list of cardinal directions
     public static List<Vector2Int> cardinalDirections = new List<Vector2Int>
         {
-            new Vector2Int(0, 1), //UP
-            new Vector2Int(1, 0), //RIGHT
-            new Vector2Int(0, -1), //DOWN
-            new Vector2Int(-1, 0), //LEFT
+            new Vector2Int(0, 1), // NORTH
+            new Vector2Int(1, 0), // EAST
+            new Vector2Int(0, -1), // SOUTH
+            new Vector2Int(-1, 0), // WEST
         };
 
-    //Method to get a random cardinal direction from out cardinalDirections list
+    //Method to get a random cardinal direction from the cardinalDirections list
     //picks a random int between 0 and the last position of the cardinalDirections list
-    public static Vector2Int GetRandomDirection() {
+    public static Vector2Int GetRandomCardinalDirection() {
         return cardinalDirections[Random.Range(0, cardinalDirections.Count)];
     }
 }

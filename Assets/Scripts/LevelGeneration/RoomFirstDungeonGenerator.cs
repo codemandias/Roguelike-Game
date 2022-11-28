@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine;
+using JetBrains.Annotations;
 
 /*
 Title: Unity 2D Procedural Dungoen Tutorial
@@ -33,8 +34,21 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     private void CreateRooms() {
         startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
 
+/*        float oneThirdX = dungeonWidth / 3;
+        float oneThirdY = dungeonHeight / 3;
+
+        if(startPos.x > -oneThirdX && startPos.x < -oneThirdX * 2) {
+            startPos.x = (int)((-oneThirdX - startPos.x) < (startPos.x + oneThirdX * 2) ? -oneThirdX : -oneThirdX * 2);
+        }
+
+        if(startPos.y > -oneThirdY && startPos.y < -oneThirdY * 2) {
+            startPos.y = (int)((-oneThirdY - startPos.y) < (startPos.y + oneThirdY * 2) ? -oneThirdY : -oneThirdY * 2);
+        }*/
+
+
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
-        roomsList.Add(createStartingRoom());
+        roomsList.Insert(0, createStartingRoom());
+        roomsList.Insert(0, createBossRoom());
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
@@ -60,11 +74,62 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
     private BoundsInt createStartingRoom() {
         BoundsInt startingRoom = new BoundsInt();
-        startingRoom.size = new Vector3Int(25, 25, 1);
+        int size = 25;
+
+
+        // Start room center will always be at 0,0
+        startingRoom.size = new Vector3Int(size, size, 1);
         startingRoom.x = -startingRoom.size.x / 2;
         startingRoom.y = -startingRoom.size.y / 2;
 
+        // Update the tilemap visualizer with the number of tiles in the start room
+        tilemapVisualizer.numStartRoomTiles = (int)Mathf.Pow(size - (offset * 2), 2);
+
         return startingRoom;
+    }
+
+    private BoundsInt createBossRoom() {
+        BoundsInt bossRoom = new BoundsInt();
+        int size = 40;
+
+        bossRoom.size = new Vector3Int(size, size, 1);
+
+        // Boss room will appear at each cardinal direction extreme, or the in betweens (N, NE, E, SE, etc.)
+
+        int centerX = -bossRoom.size.x / 2;
+        int centerY = -bossRoom.size.y / 2;
+
+        Vector2Int direction = getDirectionFromStartingPoint();
+
+        bossRoom.x = centerX + (bossRoom.size.x * direction.x * 3) + (dungeonWidth / 2) * direction.x;
+        bossRoom.y = centerY + (bossRoom.size.y * direction.y * 3) + (dungeonHeight / 2) * direction.y;
+
+        // Update the tilemap visualizer with the number of tiles in the boss room
+        tilemapVisualizer.numBossRoomTiles = (int)Mathf.Pow(size-(offset * 2), 2);
+
+        return bossRoom;
+    }
+
+    // Using the starting point (How much the dungeon "Shifts" from it's original position),
+    //      determine which cardinal direction is closest to the dungeon
+    private Vector2Int getDirectionFromStartingPoint() {
+        Vector2Int direction;
+
+        if(Math.Abs(startPos.x) + dungeonWidth > Math.Abs(startPos.y) + dungeonHeight) {
+            if(startPos.y > -dungeonHeight / 2) {
+                direction = Direction2D.cardinalDirections[0];  // North
+            } else {
+                direction = Direction2D.cardinalDirections[2];  // South
+            }
+        } else {
+            if(startPos.x > -dungeonWidth / 2) {
+                direction = Direction2D.cardinalDirections[1];  // East
+            } else {
+                direction = Direction2D.cardinalDirections[3];  // West
+            }
+        }
+
+        return direction;
     }
 
     private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters) {
