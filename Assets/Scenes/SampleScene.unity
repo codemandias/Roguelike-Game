@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 399181226}
   - component: {fileID: 399181227}
   - component: {fileID: 399181228}
+  - component: {fileID: 399181229}
   m_Layer: 0
   m_Name: minimare_robot-002_7
   m_TagString: Enemy
@@ -695,6 +696,26 @@ MonoBehaviour:
   targetCollision: 0
   speed: 2
   health: 3
+--- !u!95 &399181229
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399181223}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 925cc9316c28c0a40b2efc7d11f23145, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &459567335
 GameObject:
   m_ObjectHideFlags: 0
@@ -29222,6 +29243,7 @@ GameObject:
   - component: {fileID: 1765387764}
   - component: {fileID: 1765387763}
   - component: {fileID: 1765387765}
+  - component: {fileID: 1765387766}
   m_Layer: 0
   m_Name: minimare-001_7
   m_TagString: Enemy
@@ -29362,6 +29384,26 @@ MonoBehaviour:
   targetCollision: 0
   speed: 2
   health: 3
+--- !u!95 &1765387766
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765387760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 704c1ae0fe2e7ff42a880b46d1d95ad6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1791820958
 GameObject:
   m_ObjectHideFlags: 0
@@ -29375,6 +29417,7 @@ GameObject:
   - component: {fileID: 1791820961}
   - component: {fileID: 1791820962}
   - component: {fileID: 1791820963}
+  - component: {fileID: 1791820964}
   m_Layer: 0
   m_Name: dark_minimare-001_7
   m_TagString: Enemy
@@ -29515,6 +29558,26 @@ MonoBehaviour:
   targetCollision: 0
   speed: 2
   health: 3
+--- !u!95 &1791820964
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791820958}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6c69951fc9b41945913524da029bc03, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1881984524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 501493199, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}

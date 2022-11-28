@@ -50,7 +50,7 @@ public class SpaceBot : MonoBehaviour
                     // Get the position of the player
                     transform.LookAt(target.position);
 
-                    // Correct the rotation
+                    // Correct the rotation and set animation
                     lastPosition = transform.position;
                     transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                     transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
