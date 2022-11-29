@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 /*
 Title: Unity 2D Procedural Dungoen Tutorial
@@ -13,12 +15,11 @@ Date Accessed: November 16th, 2022
 */
 
 public class TilemapVisualizer : MonoBehaviour {
-    [SerializeField] private Tilemap floorTilemap, wallTilemap;
-    [SerializeField] private TileBase[] floorTile, wallTop, startTile, startWall, bossTile, bossWall;
+    [SerializeField] private Tilemap floorTilemap, wallTilemap, portalTileMap;
+    [SerializeField] private TileBase[] floorTile, wallTop, startTile, bossTile;
     [SerializeField] private Grid grid;
 
-    public int numBossRoomTiles;
-    public int numStartRoomTiles;
+    public List<int> numRoomTiles;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPos) {
         PaintTiles(floorPos, floorTilemap);
@@ -26,19 +27,38 @@ public class TilemapVisualizer : MonoBehaviour {
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap) {
         int index = 0;
+
+        /*        for(int i = 0; i < pos.Count; i++) {
+
+
+                    // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
+                    if(i < numRoomTiles[0]) {
+                        PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length)], pos[i]);
+
+                        // The next tiles in the list are for the starting room. Draw each one using the starting room tiles
+                    } else if(i < numRoomTiles[0] + numRoomTiles[1]) {
+                        PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length)], pos[i]);
+
+                        // For all other rooms, use default tiles
+                    } else {
+                        PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length)], pos[i]);
+                    }
+
+                }
+        */
         foreach(var position in positions) {
 
             // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
-            if(index < numBossRoomTiles) {
-                PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length - 1)], position);
+            if(index < numRoomTiles[0]) {
+                PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length)], position);
 
-            // The next tiles in the list are for the boss room. Draw each one using the starting room tiles
-            } else if(index < numBossRoomTiles + numStartRoomTiles) {
-                PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length - 1)], position);
+                // The next tiles in the list are for the starting room. Draw each one using the starting room tiles
+            } else if(index < numRoomTiles[0] + numRoomTiles[1]) {
+                PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length)], position);
 
-            // For all other rooms, use default tiles
+                // For all other rooms, use default tiles
             } else {
-                PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length - 1)], position);
+                PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length)], position);
             }
 
             index++;

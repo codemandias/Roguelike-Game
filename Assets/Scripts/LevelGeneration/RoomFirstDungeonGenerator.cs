@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
+using UnityEditor;
 
 /*
 Title: Unity 2D Procedural Dungoen Tutorial
@@ -34,21 +36,12 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     private void CreateRooms() {
         startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
 
-/*        float oneThirdX = dungeonWidth / 3;
-        float oneThirdY = dungeonHeight / 3;
-
-        if(startPos.x > -oneThirdX && startPos.x < -oneThirdX * 2) {
-            startPos.x = (int)((-oneThirdX - startPos.x) < (startPos.x + oneThirdX * 2) ? -oneThirdX : -oneThirdX * 2);
-        }
-
-        if(startPos.y > -oneThirdY && startPos.y < -oneThirdY * 2) {
-            startPos.y = (int)((-oneThirdY - startPos.y) < (startPos.y + oneThirdY * 2) ? -oneThirdY : -oneThirdY * 2);
-        }*/
-
-
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
-        roomsList.Insert(0, createStartingRoom());
-        roomsList.Insert(0, createBossRoom());
+        roomsList.Insert(0, createBossRoom()); 
+        roomsList.Insert(1, createStartingRoom());
+
+        BoundsInt bossRoom = roomsList[0];
+        BoundsInt startingRoom = roomsList[1];
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
@@ -60,6 +53,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         foreach(var room in roomsList) {
             //Add each rooms center to the roomCenters list
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
         }
         //Create a HashSet for the corridors that will connect the rooms
         //and initialize it with the room centers
@@ -81,9 +75,6 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         startingRoom.x = -startingRoom.size.x / 2;
         startingRoom.y = -startingRoom.size.y / 2;
 
-        // Update the tilemap visualizer with the number of tiles in the start room
-        tilemapVisualizer.numStartRoomTiles = (int)Mathf.Pow(roomSize - (offset * 2), 2);
-
         return startingRoom;
     }
 
@@ -102,9 +93,6 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
         bossRoom.x = centerX + (bossRoom.size.x * direction.x * 3) + (dungeonWidth / 2) * direction.x;
         bossRoom.y = centerY + (bossRoom.size.y * direction.y * 3) + (dungeonHeight / 2) * direction.y;
-
-        // Update the tilemap visualizer with the number of tiles in the boss room
-        tilemapVisualizer.numBossRoomTiles = (int)Mathf.Pow(roomSize-(offset * 2), 2);
 
         return bossRoom;
     }
