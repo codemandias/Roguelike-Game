@@ -8,7 +8,10 @@ public class PlayerMovement : MonoBehaviour {
     private Animator _animator; 
     private Transform _transform;
     public ProjectileAbility projectileAbility;
-    
+    public StunAbility stunAbility;
+    public int level = 1;
+    public int ability = 1;
+
     // Start is called before the first frame update
     void Start() {
         _animator = GetComponentInChildren<Animator>();
@@ -25,7 +28,28 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (Input.GetMouseButtonDown(0))
         {
-            projectileAbility.shootProjectile();
+            if (ability == 1)
+            {
+                if (level == 1)
+                {
+                    projectileAbility.shootProjectile();
+                }
+                else
+                {
+                    projectileAbility.shootAdvanceProjectile();
+                }
+            }
+            else {
+                if (level == 1)
+                {
+                    stunAbility.shootProjectile();
+                }
+                else
+                {
+                    stunAbility.shootAdvanceProjectile();
+                }
+            }
+                
         }
     }
 }

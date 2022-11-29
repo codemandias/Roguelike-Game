@@ -86,6 +86,23 @@ public class EnemyControl : MonoBehaviour
         Invoke("Recover", 0.25f);
     }
 
+    public void StunDamage(int damage)
+    {
+        health -= damage;
+        transform.GetChild(0).gameObject.SetActive(true);
+        StartCoroutine("Stun");
+    }
+
+    IEnumerator Stun()
+    {
+        gameObject.GetComponent<EnemyControl>().enabled = false;
+
+        yield return new WaitForSeconds(3f);
+
+        gameObject.GetComponent<EnemyControl>().enabled = true;
+        Invoke("Recover", 0.25f);
+    }
+
     void Recover()
     {
         transform.GetChild(0).gameObject.SetActive(false);

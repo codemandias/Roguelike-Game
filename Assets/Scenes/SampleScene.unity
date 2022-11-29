@@ -1261,6 +1261,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mana: 9
+--- !u!114 &950282218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950282205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b99944f2e432748894774fafa932b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1207722692801960050, guid: a4bcd0a8277dba24ab7c981c5cc0dc04, type: 3}
+  firePosition: {fileID: 1881984524}
+  force: 10
+  playerAnimation: {fileID: 0}
 --- !u!1 &989311197
 GameObject:
   m_ObjectHideFlags: 0
@@ -30781,6 +30797,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483963, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483963, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: ability
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873191986646483963, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
+      propertyPath: stunAbility
+      value: 
+      objectReference: {fileID: 950282218}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5acf0d8be7a8a41857a9fcc32f1932, type: 3}
 --- !u!4 &8075254439291245321 stripped

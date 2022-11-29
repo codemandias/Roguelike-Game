@@ -8,7 +8,7 @@ public class ProjectileAbility : MonoBehaviour
     public GameObject projectile;
     public Transform firePosition;
     public float force = 10.0f;
-    private PlayerAnimation playerAnimation;
+    public PlayerAnimation playerAnimation;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +42,22 @@ public class ProjectileAbility : MonoBehaviour
                     break;
 
             }
+        }
+    }
+    public void shootAdvanceProjectile()
+    {
+        if (this.GetComponent<PlayerMana>().mana > 0)
+        {
+            this.GetComponent<PlayerMana>().ConsumeMana();
+            GameObject searing_ray = Instantiate(projectile, firePosition.position, firePosition.rotation);
+            GameObject searing_ray_d = Instantiate(projectile, firePosition.position, firePosition.rotation);
+            GameObject searing_ray_l = Instantiate(projectile, firePosition.position, firePosition.rotation);
+            GameObject searing_ray_r = Instantiate(projectile, firePosition.position, firePosition.rotation);
+
+            searing_ray_r.GetComponent<Rigidbody2D>().AddForce(firePosition.right * force, ForceMode2D.Impulse);
+            searing_ray_l.GetComponent<Rigidbody2D>().AddForce(-firePosition.right * force, ForceMode2D.Impulse);
+            searing_ray.GetComponent<Rigidbody2D>().AddForce(firePosition.up * force, ForceMode2D.Impulse);
+            searing_ray_d.GetComponent<Rigidbody2D>().AddForce(-firePosition.up * force, ForceMode2D.Impulse);
         }
     }
 
