@@ -28,9 +28,14 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     //Setting to zero will allow for rooms to connect to one another through the floors
     [SerializeField][Range(0, 10)] private int offset = 1;
 
-    [SerializeField][Range(5, 35)] private int startRoomSize = 25;
-    [SerializeField][Range(5, 60)] private int bossRoomSize = 40;
+    [SerializeField][Range(20, 35)] private int startRoomSize = 25;
+    [SerializeField][Range(35, 60)] private int bossRoomSize = 40;
 
+    private PopulateLevel populateLevel;
+
+
+    public void Start() {
+    }
 
     protected override void RunProceduralGeneration() {
         CreateRooms();
@@ -50,6 +55,14 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         List<BoundsInt> startRoomList = new List<BoundsInt>();
         startRoomList.Add(startingRoom);
 
+        // Combine all rooms into one list for the level populater
+        var combined = roomsList;
+        combined.Insert(0, bossRoom);
+        combined.Insert(1, startingRoom);
+
+        // Pass the whole room list to the population script
+        populateLevel = GetComponent<PopulateLevel>();
+        populateLevel.roomsList = combined;
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
@@ -63,25 +76,15 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         foreach(var room in roomsList) {
             //Add each rooms center to the roomCenters list
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
-
-            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
         }
-        foreach(var room in bossRoomList) {
-            //Add each rooms center to the roomCenters list
-            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+        roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(bossRoomList[0].center));
+        roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(startRoomList[0].center));
 
-            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
-        }
-        foreach(var room in startRoomList) {
-            //Add each rooms center to the roomCenters list
-            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
 
-            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
-        }
         //Create a HashSet for the corridors that will connect the rooms
         //and initialize it with the room centers
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
-        /*        */
+
         //Paint the floor tiles
 
         tilemapVisualizer.PaintHallwayTiles(corridors);
@@ -97,12 +100,14 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
         //Create walls
         WallGenerator.CreateWalls(floor, tilemapVisualizer);
+
+        populateLevel.populateLevel();
     }
 
     private BoundsInt createStartingRoom() {
         BoundsInt startingRoom = new BoundsInt();
         int roomSize = startRoomSize;
-        startingRoom.size = new Vector3Int(roomSize, roomSize, 1);
+        startingRoom.size = new Vector3Int(roomSize, roomSize, 0);
 
         // Start room center will always be at 0,0
         startingRoom.x = -startingRoom.size.x / 2;
@@ -115,7 +120,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         BoundsInt bossRoom = new BoundsInt();
 
         int roomSize = bossRoomSize;
-        bossRoom.size = new Vector3Int(roomSize, roomSize, 1);
+        bossRoom.size = new Vector3Int(roomSize, roomSize, 0);
 
         // Finding the center of the level
         int centerX = -bossRoom.size.x / 2;
