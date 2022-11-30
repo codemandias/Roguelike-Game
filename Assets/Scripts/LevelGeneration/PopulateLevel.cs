@@ -26,10 +26,10 @@ public class PopulateLevel : MonoBehaviour {
         var objectList = environment.transform.Cast<Transform>().ToList();
 
         foreach(Transform child in objectList) {
-            if(Application.isEditor) {
+            if(Application.isEditor && !Application.isPlaying) {
                 DestroyImmediate(child.gameObject);
             } else {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
         }
 
@@ -38,6 +38,11 @@ public class PopulateLevel : MonoBehaviour {
         populateItemRoom();
 
         generateScenery();
+        generateEnemies();
+    }
+
+    private void generateEnemies() {
+        // TODO: Implement enemy generation
     }
 
     private void populateItemRoom() {

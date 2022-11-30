@@ -35,6 +35,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
 
     public void Start() {
+        GenerateDungeon();
     }
 
     protected override void RunProceduralGeneration() {

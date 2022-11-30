@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6656526803142909080}
   - component: {fileID: 6656526803142909083}
+  - component: {fileID: 1415195047}
   m_Layer: 0
   m_Name: RoomsFirstDungeonGenerator
   m_TagString: Untagged
@@ -45,11 +46,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemapVisualizer: {fileID: 0}
-  startPos: {x: 0, y: 0}
-  randomWalkParameters: {fileID: 11400000, guid: e6c0c198bacdda94ead400c9d2625fdd, type: 2}
-  minRoomWidth: 20
-  minRoomHeight: 20
-  dungeonWidth: 150
-  dungeonHeight: 150
-  offset: 3
-  randomWalkRooms: 1
+  startPos: {x: -200, y: -153}
+  minRoomWidth: 35
+  minRoomHeight: 35
+  dungeonWidth: 256
+  dungeonHeight: 256
+  offset: 4
+  startRoomSize: 30
+  bossRoomSize: 60
+--- !u!114 &1415195047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656526803142909082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5a3579f84fa345b9003a45654d9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomsList:
+  - m_Position: {x: -30, y: -338, z: 0}
+    m_Size: {x: 60, y: 60, z: 0}
+  - m_Position: {x: -15, y: -15, z: 0}
+    m_Size: {x: 30, y: 30, z: 0}
+  - m_Position: {x: -3, y: -153, z: 0}
+    m_Size: {x: 59, y: 47, z: 0}
+  - m_Position: {x: -54, y: -153, z: 0}
+    m_Size: {x: 51, y: 47, z: 0}
+  - m_Position: {x: -83, y: -106, z: 0}
+    m_Size: {x: 54, y: 52, z: 0}
+  - m_Position: {x: -2, y: -26, z: 0}
+    m_Size: {x: 58, y: 47, z: 0}
+  - m_Position: {x: -200, y: 46, z: 0}
+    m_Size: {x: 58, y: 46, z: 0}
+  - m_Position: {x: -13, y: -77, z: 0}
+    m_Size: {x: 69, y: 51, z: 0}
+  - m_Position: {x: -54, y: 61, z: 0}
+    m_Size: {x: 52, y: 42, z: 0}
+  - m_Position: {x: -58, y: 0, z: 0}
+    m_Size: {x: 56, y: 61, z: 0}
+  - m_Position: {x: -2, y: 27, z: 0}
+    m_Size: {x: 58, y: 48, z: 0}
+  - m_Position: {x: -178, y: -103, z: 0}
+    m_Size: {x: 62, y: 69, z: 0}
+  environment: {fileID: 0}
+  generationOffset: 4
+  sceneryDensity: 0.41
+  alter: {fileID: 4781987910715124873, guid: 364f1991f678179459f76fe64658208a, type: 3}
+  items:
+  - {fileID: 4097804600723735672, guid: a97c4a9fabd6b604986cd52a6376975e, type: 3}
+  - {fileID: 2977855462511578772, guid: 9851a27fd6c47db40aaa05bd36a4aed0, type: 3}
+  - {fileID: 4817491580287454350, guid: 96cb7310a0cefa5458f91808e1e31626, type: 3}
+  - {fileID: 2229864483337618142, guid: 6589802f39212604db4dee9a92d2da78, type: 3}
+  - {fileID: 4229514480252894112, guid: a09112bb0841af5438a251f132e1675c, type: 3}
+  - {fileID: 8508516236615106998, guid: b81b42235e05f5e4eb1c729f8cadebb0, type: 3}
+  - {fileID: 5738939868966366692, guid: 8499759991f6482469fa365e54247895, type: 3}
+  - {fileID: 3485818419897217505, guid: 61e61dcd463ae8241a2ab3b695687818, type: 3}
+  portals:
+  - {fileID: 321164969674553674, guid: 50b979ded1e276646bb91903d38448a6, type: 3}
+  - {fileID: 6098131945809329213, guid: 85a79fe9aec13bb438592edd9772bc1a, type: 3}
+  scenery:
+  - {fileID: 8306482028603883089, guid: 6a344848c045aa4488155e88b3841809, type: 3}
+  - {fileID: 7568712502929694653, guid: cf69d5a9e77ec5645afb1294c99f61c7, type: 3}
+  - {fileID: 7568712502929694653, guid: 057eed8454ddf0640b6b284e8a1f7213, type: 3}
+  - {fileID: 7568712502929694653, guid: a228030eec55c8a438ae2e540dfb5f8a, type: 3}
+  traps: []
+  enemies: []
