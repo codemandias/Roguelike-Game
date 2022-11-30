@@ -13,7 +13,9 @@ public class PopulateLevel : MonoBehaviour {
     public int generationOffset;
 
     [SerializeField][Range(0, 1)] private float sceneryDensity;
+    [SerializeField] private GameObject alter;
 
+    [SerializeField] private GameObject[] items;
     [SerializeField] private GameObject[] portals;
     [SerializeField] private GameObject[] scenery;
     [SerializeField] private GameObject[] traps;
@@ -33,8 +35,20 @@ public class PopulateLevel : MonoBehaviour {
 
         populateStartRoom();
         populateBossRoom();
+        populateItemRoom();
 
         generateScenery();
+    }
+
+    private void populateItemRoom() {
+        BoundsInt room = roomsList[Random.Range(2, roomsList.Count)];
+
+        GameObject itemStand = Instantiate(alter, environment.transform);
+        itemStand.transform.position = room.center * 0.32f;
+
+        GameObject item = itemStand.transform.GetChild(0).gameObject;
+        item = Instantiate(items[Random.Range(0, items.Length)], itemStand.transform);
+        item.transform.Translate(0, 0.2f, -0.01f);
     }
 
     private void generateScenery() {
