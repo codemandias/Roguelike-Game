@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +29,10 @@ public class Projectile : MonoBehaviour
                 break;
             case "BotEnemy":
                 collision.gameObject.GetComponent<SpaceBot>().Damage(1);
+                Destroy(gameObject);
+                break;
+            case "BossEnemy":
+                collision.gameObject.GetComponent<BossControl>().Damage(1);
                 Destroy(gameObject);
                 break;
             case "Item":

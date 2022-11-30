@@ -31,6 +31,10 @@ public class StunProjectile : Projectile
                 collision.gameObject.GetComponent<SpaceBot>().StunDamage(1);
                 Destroy(gameObject);
                 break;
+            case "BossEnemy":
+                collision.gameObject.GetComponent<BossControl>().StunDamage(1);
+                Destroy(gameObject);
+                break;
             case "Item":
                 Destroy(gameObject);
                 break;
