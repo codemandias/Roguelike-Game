@@ -10,11 +10,16 @@ public class EnemyControl : MonoBehaviour
     public bool targetCollision = false;
     public float speed = 2.0f;
     public int health = 5;
-
+    private Animator anim;
+    private Rigidbody rb;
+    private Vector3 lastPosition;
 
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()
@@ -32,9 +37,13 @@ public class EnemyControl : MonoBehaviour
                     // Get the position of the player
                     transform.LookAt(target.position);
 
-                    // Correct the rotation
+                    // Correct the rotation and set animation
+                    lastPosition = transform.position;
                     transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                     transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                    Vector3 direction = transform.position - lastPosition;
+                    anim.SetFloat("X", direction.x);
+                    anim.SetFloat("Y", direction.y);
                 }
             }
             transform.rotation = Quaternion.identity;
@@ -74,6 +83,23 @@ public class EnemyControl : MonoBehaviour
     {
         health -= damage;
         transform.GetChild(0).gameObject.SetActive(true);
+        Invoke("Recover", 0.25f);
+    }
+
+    public void StunDamage(int damage)
+    {
+        health -= damage;
+        transform.GetChild(0).gameObject.SetActive(true);
+        StartCoroutine("Stun");
+    }
+
+    IEnumerator Stun()
+    {
+        gameObject.GetComponent<EnemyControl>().enabled = false;
+
+        yield return new WaitForSeconds(3f);
+
+        gameObject.GetComponent<EnemyControl>().enabled = true;
         Invoke("Recover", 0.25f);
     }
 
