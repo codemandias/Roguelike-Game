@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class PopulateLevel : MonoBehaviour {
     public List<BoundsInt> roomsList;
     public GameObject environment;
     public int generationOffset;
+
+    [SerializeField][Range(0, 1)] private float sceneryDensity;
 
     [SerializeField] private GameObject[] portals;
     [SerializeField] private GameObject[] scenery;
@@ -36,23 +39,22 @@ public class PopulateLevel : MonoBehaviour {
 
     private void generateScenery() {
         for(int i = 2; i < roomsList.Count; i++) {
-            Vector3 position = new Vector3(roomsList[i].position.x + generationOffset + 1, roomsList[i].position.y + generationOffset + 1);
+            Vector3 center = roomsList[i].center;
 
-            for(int j = 0; j < roomsList[i].size.y - 2; j++) {
-                for(int k = 0; k < roomsList[i].size.x - 2; k++) {
+            for(int j = 0; j < roomsList[i].size.y; j++) {
+                for(int k = 0; k < roomsList[i].size.x; k++) {
                     // Each tile has a 1/1000 chance to contain scenery
-                    int chance = Random.Range(0, 1000);
+                    int chance = (int)Random.Range(0, 1000 * (1-sceneryDensity));
 
 
                     if(chance == 0) {
                         GameObject obj = Instantiate(scenery[Random.Range(0, scenery.Length)], environment.transform);
+                        Vector3 position = new Vector3(center.x + Random.Range(-roomsList[i].size.x / 2 + generationOffset + 1, roomsList[i].size.x / 2 - generationOffset - 1),
+                                                       center.y + Random.Range(-roomsList[i].size.y / 2 + generationOffset + 1, roomsList[i].size.y / 2 - generationOffset - 1), 0);
+
                         obj.transform.position = position * 0.32f;
                     }
-
-                    position.x += 1;
                 }
-                position.y += 1;
-                position.x = roomsList[i].x;
             }
         }
     }
