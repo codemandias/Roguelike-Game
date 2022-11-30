@@ -19,6 +19,7 @@ public class ExitPortal : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Player")) {
+            roomFirstDungeonGenerator.floorLevel++;
             roomFirstDungeonGenerator.GenerateDungeon();
             collision.transform.position = playerStartPos;
         }

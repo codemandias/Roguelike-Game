@@ -100,7 +100,6 @@ public class SpaceBot : MonoBehaviour
     public void StunDamage(int damage)
     {
         health -= damage;
-        transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine("Stun");
     }
 
@@ -111,6 +110,5 @@ public class SpaceBot : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         gameObject.GetComponent<SpaceBot>().enabled = true;
-        Invoke("Recover", 0.25f);
     }
 }

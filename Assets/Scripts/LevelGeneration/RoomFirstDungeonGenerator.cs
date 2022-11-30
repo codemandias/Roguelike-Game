@@ -16,6 +16,8 @@ Date Accessed: November 16th, 2022
 */
 
 public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
+    public int floorLevel;
+
     //Minimum width of a room in the dungeon
     [SerializeField] private int minRoomWidth = 4;
     //Minimum height of a room in the dungeon
@@ -35,6 +37,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
 
     public void Start() {
+        floorLevel = 0;
         GenerateDungeon();
     }
 
