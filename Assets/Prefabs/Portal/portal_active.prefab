@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2827694666941357336}
   - component: {fileID: 1609359841617200366}
   m_Layer: 0
-  m_Name: zig_portal
+  m_Name: portal_active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

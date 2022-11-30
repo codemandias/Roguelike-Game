@@ -63,6 +63,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         // Pass the whole room list to the population script
         populateLevel = GetComponent<PopulateLevel>();
         populateLevel.roomsList = combined;
+        populateLevel.generationOffset = offset;
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
