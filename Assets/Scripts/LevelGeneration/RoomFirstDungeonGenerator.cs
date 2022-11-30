@@ -28,6 +28,9 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     //Setting to zero will allow for rooms to connect to one another through the floors
     [SerializeField][Range(0, 10)] private int offset = 1;
 
+    [SerializeField][Range(5, 35)] private int startRoomSize = 25;
+    [SerializeField][Range(5, 60)] private int bossRoomSize = 40;
+
 
     protected override void RunProceduralGeneration() {
         CreateRooms();
@@ -37,15 +40,22 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
 
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
-        roomsList.Insert(0, createBossRoom()); 
-        roomsList.Insert(1, createStartingRoom());
 
-        BoundsInt bossRoom = roomsList[0];
-        BoundsInt startingRoom = roomsList[1];
+        BoundsInt bossRoom = createBossRoom();
+        BoundsInt startingRoom = createStartingRoom();
+
+        List<BoundsInt> bossRoomList = new List<BoundsInt>();
+        bossRoomList.Add(bossRoom);
+        
+        List<BoundsInt> startRoomList = new List<BoundsInt>();
+        startRoomList.Add(startingRoom);
+
 
         //Create a HashSet to store the floor positions
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
         floor = CreateSimpleRooms(roomsList);
+        HashSet<Vector2Int> boss = CreateSimpleRooms(bossRoomList);
+        HashSet<Vector2Int> start= CreateSimpleRooms(startRoomList);
 
         //Create a list to store the centers of each room created
         List<Vector2Int> roomCenters = new List<Vector2Int>();
@@ -53,22 +63,45 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
         foreach(var room in roomsList) {
             //Add each rooms center to the roomCenters list
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+
+            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
+        }
+        foreach(var room in bossRoomList) {
+            //Add each rooms center to the roomCenters list
+            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+
+            tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
+        }
+        foreach(var room in startRoomList) {
+            //Add each rooms center to the roomCenters list
+            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+
             tilemapVisualizer.numRoomTiles.Add((room.size.x - offset * 2) * (room.size.y - offset * 2));
         }
         //Create a HashSet for the corridors that will connect the rooms
         //and initialize it with the room centers
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+        /*        */
+        //Paint the floor tiles
+
+        tilemapVisualizer.PaintHallwayTiles(corridors);
+        tilemapVisualizer.PaintGeneralTiles(floor);
+        tilemapVisualizer.PaintBossTiles(boss);
+        tilemapVisualizer.PaintStartTiles(start);
+
         //Combine with corridors with the floor tiles of the rooms
         floor.UnionWith(corridors);
-        //Paint the floor tiles
-        tilemapVisualizer.PaintFloorTiles(floor);
+        floor.UnionWith(boss);
+        floor.UnionWith(start);
+
+
         //Create walls
         WallGenerator.CreateWalls(floor, tilemapVisualizer);
     }
 
     private BoundsInt createStartingRoom() {
         BoundsInt startingRoom = new BoundsInt();
-        int roomSize = 25;
+        int roomSize = startRoomSize;
         startingRoom.size = new Vector3Int(roomSize, roomSize, 1);
 
         // Start room center will always be at 0,0
@@ -81,7 +114,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     private BoundsInt createBossRoom() {
         BoundsInt bossRoom = new BoundsInt();
 
-        int roomSize = 40;
+        int roomSize = bossRoomSize;
         bossRoom.size = new Vector3Int(roomSize, roomSize, 1);
 
         // Finding the center of the level

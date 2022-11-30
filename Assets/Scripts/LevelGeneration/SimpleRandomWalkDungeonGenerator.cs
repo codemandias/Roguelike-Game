@@ -33,7 +33,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
             movingStartPos.Set(movingStartPos.x + Random.Range(-2,3) * randomWalkParameters.walkLength, movingStartPos.y + Random.Range(-2, 3) * randomWalkParameters.walkLength);
         }
         
-        tilemapVisualizer.PaintFloorTiles(floorPos);
+        tilemapVisualizer.PaintGeneralTiles(floorPos);
         WallGenerator.CreateWalls(floorPos, tilemapVisualizer);
     }
 

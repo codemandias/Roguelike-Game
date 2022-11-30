@@ -15,38 +15,62 @@ Date Accessed: November 16th, 2022
 */
 
 public class TilemapVisualizer : MonoBehaviour {
-    [SerializeField] private Tilemap floorTilemap, wallTilemap, portalTileMap;
-    [SerializeField] private TileBase[] floorTile, wallTop, startTile, bossTile;
+    [SerializeField] private Tilemap floorTilemap, wallTilemap;
+    [SerializeField] private TileBase[] floorTile, wallTop, startTile, bossTile, hallwayTile;
     [SerializeField] private Grid grid;
 
     public List<int> numRoomTiles;
 
-    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPos) {
-        PaintTiles(floorPos, floorTilemap);
+    public void PaintStartTiles(IEnumerable<Vector2Int> floorPos) {
+        PaintTiles(floorPos, floorTilemap, startTile);
     }
 
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap) {
-        int index = 0;
+    public void PaintBossTiles(IEnumerable<Vector2Int> floorPos) {
+        PaintTiles(floorPos, floorTilemap, bossTile);
+    }
 
-        /*        for(int i = 0; i < pos.Count; i++) {
+    public void PaintGeneralTiles(IEnumerable<Vector2Int> floorPos) {
+        PaintTiles(floorPos, floorTilemap, floorTile);
+    }
 
+    public void PaintHallwayTiles(IEnumerable<Vector2Int> hallwayPos) {
+        PaintTiles(hallwayPos, floorTilemap, hallwayTile);
+    }
 
-                    // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
-                    if(i < numRoomTiles[0]) {
-                        PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length)], pos[i]);
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase[] tileBase) {
+        List<Vector2Int> pos = positions.ToList();
 
-                        // The next tiles in the list are for the starting room. Draw each one using the starting room tiles
-                    } else if(i < numRoomTiles[0] + numRoomTiles[1]) {
-                        PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length)], pos[i]);
-
-                        // For all other rooms, use default tiles
-                    } else {
-                        PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length)], pos[i]);
-                    }
-
-                }
-        */
         foreach(var position in positions) {
+            PaintSingleTile(tilemap, tileBase[Random.Range(0, tileBase.Length)], position);
+        }
+
+        /*int roomNum = 0;
+
+        for(int i = 0; i < pos.Count; i++) {
+            // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
+            if(i < numRoomTiles[0]) {
+                PaintSingleTile(tilemap, bossTile[Random.Range(0, bossTile.Length)], pos[i]);
+
+                // The next tiles in the list are for the starting room. Draw each one using the starting room tiles
+            } else if(i < numRoomTiles[0] + numRoomTiles[1]) {
+                PaintSingleTile(tilemap, startTile[Random.Range(0, startTile.Length)], pos[i]);
+
+                // For all other rooms, use default tiles
+            } else if(i <= nextRoomTileIndex){
+                PaintSingleTile(tilemap, floorTile[Random.Range(0, floorTile.Length)], pos[i]);
+            } else {
+                PaintSingleTile(tilemap, hallwayTile[Random.Range(0, hallwayTile.Length)], pos[i]);
+            }
+
+            if(i == nextRoomTileIndex) {
+                roomNum++;
+                nextRoomTileIndex += numRoomTiles[roomNum];
+            }
+        }*/
+
+        /*int nextRoomIndex = 0;
+        foreach(var position in positions) {
+            nextRoomIndex += index + 
 
             // The first tiles in the list are for the boss room. Draw each one using the boss room tiles
             if(index < numRoomTiles[0]) {
@@ -62,7 +86,7 @@ public class TilemapVisualizer : MonoBehaviour {
             }
 
             index++;
-        }
+        }*/
     }
 
     private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position) {
