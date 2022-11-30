@@ -26,6 +26,8 @@ public class FogOfWar : MonoBehaviour {
         sightQuad.SetActive(isActive);
         shadowQuad.SetActive(isActive);
 
+        sightQuad.transform.localScale = new Vector3(sightDistance, sightDistance, -1);
+
         if(isActive) {
             int layerMask = 1 << 6;
 
