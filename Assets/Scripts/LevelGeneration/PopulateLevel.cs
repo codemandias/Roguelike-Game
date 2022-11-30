@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -10,9 +11,13 @@ using Random = UnityEngine.Random;
 public class PopulateLevel : MonoBehaviour {
     public List<BoundsInt> roomsList;
     public GameObject environment;
+    public GameObject enemyPlane;
+    public GameObject player;
     public int generationOffset;
 
     [SerializeField][Range(0, 1)] private float sceneryDensity;
+    [SerializeField][Range(0, 1)] private float enemyDensity;
+
     [SerializeField] private GameObject alter;
 
     [SerializeField] private GameObject[] items;
@@ -26,11 +31,12 @@ public class PopulateLevel : MonoBehaviour {
         var objectList = environment.transform.Cast<Transform>().ToList();
 
         foreach(Transform child in objectList) {
-            if(Application.isEditor && !Application.isPlaying) {
-                DestroyImmediate(child.gameObject);
-            } else {
-                Destroy(child.gameObject);
-            }
+            DestroyGameObject(child.gameObject);
+        }
+
+        var enemyList = enemyPlane.transform.Cast<Transform>().ToList();
+        foreach(Transform child in enemyList) {
+            DestroyGameObject(child.gameObject);
         }
 
         populateStartRoom();
@@ -42,7 +48,38 @@ public class PopulateLevel : MonoBehaviour {
     }
 
     private void generateEnemies() {
-        // TODO: Implement enemy generation
+        // The distance from the player in which enemies should not spawn
+        float minDistanceFromPlayer = 8;
+
+        // For each room, generate some enemies
+        for(int i = 2; i < roomsList.Count; i++) {
+            Vector3 center = roomsList[i].center;
+
+            // There should be about 1 enemy for every 200 tiles
+            int numbersOfEnemies = (int)((roomsList[i].size.x * roomsList[i].size.y) / 500 * enemyDensity);
+
+            for(int j = 0; j < numbersOfEnemies; j++) {
+                GameObject obj = Instantiate(enemies[Random.Range(0, enemies.Length)], enemyPlane.transform);
+
+                // Number of attempts to place the enemy, if more than 3, remove the enemy
+                int attempts = 0;
+
+                Vector3 position;
+
+                do {
+                    position = new Vector3(center.x + Random.Range(-roomsList[i].size.x / 2 + generationOffset + 1, roomsList[i].size.x / 2 - generationOffset - 1),
+                                                   center.y + Random.Range(-roomsList[i].size.y / 2 + generationOffset + 1, roomsList[i].size.y / 2 - generationOffset - 1), -1);
+
+                    obj.transform.position = position * 0.32f;
+                    attempts++;
+
+                    if(attempts > 3) {
+                        DestroyGameObject(obj);
+                        break;
+                    }
+                } while(Vector2.Distance(obj.transform.position, player.transform.position) < minDistanceFromPlayer);
+            }
+        }
     }
 
     private void populateItemRoom() {
@@ -50,6 +87,7 @@ public class PopulateLevel : MonoBehaviour {
 
         GameObject itemStand = Instantiate(alter, environment.transform);
         itemStand.transform.position = room.center * 0.32f;
+        itemStand.transform.Translate(0, 0, -1);
 
         GameObject item = itemStand.transform.GetChild(0).gameObject;
         item = Instantiate(items[Random.Range(0, items.Length)], itemStand.transform);
@@ -69,7 +107,7 @@ public class PopulateLevel : MonoBehaviour {
                     if(chance == 0) {
                         GameObject obj = Instantiate(scenery[Random.Range(0, scenery.Length)], environment.transform);
                         Vector3 position = new Vector3(center.x + Random.Range(-roomsList[i].size.x / 2 + generationOffset + 1, roomsList[i].size.x / 2 - generationOffset - 1),
-                                                       center.y + Random.Range(-roomsList[i].size.y / 2 + generationOffset + 1, roomsList[i].size.y / 2 - generationOffset - 1), 0);
+                                                       center.y + Random.Range(-roomsList[i].size.y / 2 + generationOffset + 1, roomsList[i].size.y / 2 - generationOffset - 1), -1);
 
                         obj.transform.position = position * 0.32f;
                     }
@@ -87,6 +125,16 @@ public class PopulateLevel : MonoBehaviour {
         
         // Generally, the world center will equal the startRoom center, but just for sanity checking
         enterPortal.transform.position = center;
+        enterPortal.transform.Translate(0, 0, -1);
+    }
+
+
+    private void DestroyGameObject(GameObject obj) {
+        if(Application.isEditor && !Application.isPlaying) {
+            DestroyImmediate(obj);
+        } else {
+            Destroy(obj);
+        }
     }
 
     public void populateBossRoom() {
@@ -95,6 +143,7 @@ public class PopulateLevel : MonoBehaviour {
 
         GameObject exitPortal = Instantiate(portals[1], environment.transform);
         exitPortal.transform.position = center;
+        exitPortal.transform.Translate(0, 0, -1);
 
         exitPortal.SetActive(false);
     }

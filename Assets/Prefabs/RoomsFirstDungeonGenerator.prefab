@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemapVisualizer: {fileID: 0}
-  startPos: {x: -200, y: -153}
+  startPos: {x: -182, y: -170}
   minRoomWidth: 35
   minRoomHeight: 35
   dungeonWidth: 256
@@ -67,33 +67,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomsList:
-  - m_Position: {x: -30, y: -338, z: 0}
+  - m_Position: {x: 278, y: -30, z: 0}
     m_Size: {x: 60, y: 60, z: 0}
   - m_Position: {x: -15, y: -15, z: 0}
     m_Size: {x: 30, y: 30, z: 0}
-  - m_Position: {x: -3, y: -153, z: 0}
-    m_Size: {x: 59, y: 47, z: 0}
-  - m_Position: {x: -54, y: -153, z: 0}
-    m_Size: {x: 51, y: 47, z: 0}
-  - m_Position: {x: -83, y: -106, z: 0}
-    m_Size: {x: 54, y: 52, z: 0}
-  - m_Position: {x: -2, y: -26, z: 0}
-    m_Size: {x: 58, y: 47, z: 0}
-  - m_Position: {x: -200, y: 46, z: 0}
-    m_Size: {x: 58, y: 46, z: 0}
-  - m_Position: {x: -13, y: -77, z: 0}
-    m_Size: {x: 69, y: 51, z: 0}
-  - m_Position: {x: -54, y: 61, z: 0}
-    m_Size: {x: 52, y: 42, z: 0}
-  - m_Position: {x: -58, y: 0, z: 0}
-    m_Size: {x: 56, y: 61, z: 0}
-  - m_Position: {x: -2, y: 27, z: 0}
-    m_Size: {x: 58, y: 48, z: 0}
-  - m_Position: {x: -178, y: -103, z: 0}
-    m_Size: {x: 62, y: 69, z: 0}
+  - m_Position: {x: -116, y: -36, z: 0}
+    m_Size: {x: 56, y: 55, z: 0}
+  - m_Position: {x: -116, y: 19, z: 0}
+    m_Size: {x: 56, y: 42, z: 0}
+  - m_Position: {x: -116, y: -195, z: 0}
+    m_Size: {x: 56, y: 36, z: 0}
+  - m_Position: {x: -116, y: -143, z: 0}
+    m_Size: {x: 56, y: 65, z: 0}
+  - m_Position: {x: 59, y: -177, z: 0}
+    m_Size: {x: 40, y: 67, z: 0}
+  - m_Position: {x: 99, y: -177, z: 0}
+    m_Size: {x: 41, y: 67, z: 0}
+  - m_Position: {x: 59, y: -108, z: 0}
+    m_Size: {x: 60, y: 49, z: 0}
+  - m_Position: {x: 59, y: -31, z: 0}
+    m_Size: {x: 63, y: 64, z: 0}
+  - m_Position: {x: 22, y: -132, z: 0}
+    m_Size: {x: 37, y: 65, z: 0}
+  - m_Position: {x: 22, y: -67, z: 0}
+    m_Size: {x: 37, y: 62, z: 0}
+  - m_Position: {x: 22, y: -5, z: 0}
+    m_Size: {x: 37, y: 51, z: 0}
+  - m_Position: {x: -37, y: -144, z: 0}
+    m_Size: {x: 59, y: 38, z: 0}
+  - m_Position: {x: -37, y: -106, z: 0}
+    m_Size: {x: 59, y: 43, z: 0}
+  - m_Position: {x: -37, y: -63, z: 0}
+    m_Size: {x: 59, y: 59, z: 0}
   environment: {fileID: 0}
   generationOffset: 4
-  sceneryDensity: 0.41
+  sceneryDensity: 0.25
   alter: {fileID: 4781987910715124873, guid: 364f1991f678179459f76fe64658208a, type: 3}
   items:
   - {fileID: 4097804600723735672, guid: a97c4a9fabd6b604986cd52a6376975e, type: 3}
