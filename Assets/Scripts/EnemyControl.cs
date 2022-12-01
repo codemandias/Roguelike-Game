@@ -24,8 +24,8 @@ public class EnemyControl : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
-        {
+        if (health <= 0) {
+            target.gameObject.GetComponent<PlayerHealth>().Heal(1);
             Destroy(gameObject);
         }
         if (target != null) {

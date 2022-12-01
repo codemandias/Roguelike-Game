@@ -22,17 +22,22 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            // TODO: Begin new run
             Destroy(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
+/*        if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(1);
             Debug.Log(currentHealth);
-        }
+        }*/
     }
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Damage: " + currentHealth);
+        healthBar.setHealth(currentHealth);
+    }
+
+    public void Heal(int healAmount) {
+        currentHealth += healAmount;
         healthBar.setHealth(currentHealth);
     }
 
@@ -40,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.setHealth(currentHealth);
-        Debug.Log("Shock damage: " + currentHealth);
+
         transform.Find("shockEffect").gameObject.SetActive(true);
         Invoke("Recover", 3f);
     }
@@ -48,7 +53,6 @@ public class PlayerHealth : MonoBehaviour
     public void Recover()
     {
         healthBar.setHealth(currentHealth);
-        Debug.Log("Recover: " + currentHealth);
         transform.Find("shockEffect").gameObject.SetActive(false);
     }
 
