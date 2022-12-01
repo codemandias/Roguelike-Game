@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerMana : MonoBehaviour
 {
+    [SerializeField] private HealthBar healthManaBar;
+
     public int mana = 9;
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthManaBar.setMaxMana(mana);
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class PlayerMana : MonoBehaviour
         if (mana > 0)
         {
             mana -= 1;
+            healthManaBar.setMana(mana);
         }
     }
 
@@ -36,6 +39,8 @@ public class PlayerMana : MonoBehaviour
         {
             mana = 9;
         }
+
+        healthManaBar.setMana(mana);
     }
 
 }

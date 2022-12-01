@@ -35,7 +35,10 @@ public class AppearWhenRoomCleared : MonoBehaviour {
         // If no enemies are around, display the item
         if(!containsEnemy) {
             alter.SetActive(true);
-            item.SetActive(true);
+            // Check to make sure the item hasn't been removed (picked up)
+            if(item) {
+                item.SetActive(true);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class PopulateLevel : MonoBehaviour {
     public GameObject enemyPlane;
     public GameObject player;
     public int generationOffset;
+    public int floorLevel;
 
     [SerializeField][Range(0, 1)] private float sceneryDensity;
     [SerializeField][Range(0, 1)] private float enemyDensity;
