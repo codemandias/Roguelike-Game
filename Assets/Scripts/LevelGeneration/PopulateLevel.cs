@@ -26,6 +26,7 @@ public class PopulateLevel : MonoBehaviour {
     [SerializeField] private GameObject[] scenery;
     [SerializeField] private GameObject[] traps;
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private GameObject[] bossEnemy;
 
 
     public void populateLevel() {
@@ -51,6 +52,14 @@ public class PopulateLevel : MonoBehaviour {
     private void generateEnemies() {
         // The distance from the player in which enemies should not spawn
         float minDistanceFromPlayer = 8;
+
+
+        // Generate boss in boss room
+        GameObject boss = Instantiate(bossEnemy[0], enemyPlane.transform);
+        boss.transform.position = roomsList[0].center * 0.32f;
+        boss.transform.Translate(0, 0, -1);
+
+
 
         // For each room, generate some enemies
         for(int i = 2; i < roomsList.Count; i++) {
