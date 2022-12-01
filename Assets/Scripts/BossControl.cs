@@ -27,6 +27,21 @@ public class BossControl : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            int level;
+            int ability;
+            level = target.GetComponent<PlayerMovement>().level;
+            ability = target.GetComponent<PlayerMovement>().ability ;
+            if (level < 2 || ability < 2) {
+                switch (level)
+                {
+                    case 1:
+                        target.GetComponent<PlayerMovement>().level = 2;
+                        break;
+                    case 2:
+                        target.GetComponent<PlayerMovement>().ability = 2;
+                        break;
+                }
+            }
         }
         if (target != null)
         {
