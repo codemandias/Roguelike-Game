@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -22,8 +23,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // TODO: Begin new run
-            
+            // Generate a new run
+            SceneManager.LoadScene("SpaceShipGeneration");
         }
 
     }
