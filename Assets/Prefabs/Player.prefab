@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 8873191986646483960}
   - component: {fileID: 1440799695}
   - component: {fileID: 8075254439291245331}
+  - component: {fileID: 6453223932063287465}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -548,6 +549,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   projectileAbility: {fileID: 8075254439291245326}
+  stunAbility: {fileID: 950282218}
+  level: 2
+  ability: 2
 --- !u!61 &8873191986646483961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -609,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   sightQuad: {fileID: 1829981610}
-  shadowQuad: {fileID: 4840429108395416882}
+  shadowQuad: {fileID: 0}
   sightDistance: 3.5
   angle: 0.1
 --- !u!114 &8075254439291245331
@@ -624,8 +628,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc3b21605305c5458fb94c9a163fb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  maxHealth: 20
+  currentHealth: 0
   statusEffect: 0
+  healthBar: {fileID: 0}
+--- !u!114 &6453223932063287465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873191986646483957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9eba68631394463dbc856371d19d6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
 --- !u!1 &8873191987369303675
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +813,8 @@ GameObject:
   - component: {fileID: 8873191988365035202}
   - component: {fileID: 959892996017645282}
   - component: {fileID: 8075254439291245326}
+  - component: {fileID: 950282212}
+  - component: {fileID: 950282218}
   m_Layer: 0
   m_Name: Orion
   m_TagString: Untagged
@@ -926,6 +947,7 @@ MonoBehaviour:
   projectile: {fileID: 9081409515151931137, guid: a2a010bb043f5d646b0515a976ad8dc1, type: 3}
   firePosition: {fileID: 8873191988365035198}
   force: 10
+  playerAnimation: {fileID: 0}
 --- !u!114 &8075254439291245326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,6 +963,36 @@ MonoBehaviour:
   projectile: {fileID: 9081409515151931137, guid: a2a010bb043f5d646b0515a976ad8dc1, type: 3}
   firePosition: {fileID: 501493199}
   force: 10
+  playerAnimation: {fileID: 0}
+--- !u!114 &950282212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873191988365035194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42650bb9de7f9e342bc6aab0a24022d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: 9
+--- !u!114 &950282218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873191988365035194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b99944f2e432748894774fafa932b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1207722692801960050, guid: a4bcd0a8277dba24ab7c981c5cc0dc04, type: 3}
+  firePosition: {fileID: 501493199}
+  force: 10
+  playerAnimation: {fileID: 0}
 --- !u!1001 &1600217437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1005,10 +1057,5 @@ PrefabInstance:
 --- !u!4 &4017747823717632594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4017747822457170703, guid: 4c881f481e1fb974b9031921427d3002, type: 3}
-  m_PrefabInstance: {fileID: 1600217437}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4840429108395416882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4840429106833128559, guid: 4c881f481e1fb974b9031921427d3002, type: 3}
   m_PrefabInstance: {fileID: 1600217437}
   m_PrefabAsset: {fileID: 0}
