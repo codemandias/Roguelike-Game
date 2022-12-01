@@ -37,8 +37,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void Heal(int healAmount) {
-        currentHealth += healAmount;
-        healthBar.setHealth(currentHealth);
+        if (currentHealth < maxHealth) {
+            currentHealth += healAmount;
+            healthBar.setHealth(currentHealth);
+        }
     }
 
     public void shockDamage(int damage)
