@@ -23,7 +23,7 @@ public class ProjectileAbility : MonoBehaviour
     
     public void shootProjectile()
     {
-        if (this.GetComponent<PlayerMana>().mana > 0) {
+        if (this.GetComponent<PlayerMana>().currentMana > 0) {
             this.GetComponent<PlayerMana>().ConsumeMana();
             GameObject searing_ray = Instantiate(projectile, firePosition.position, firePosition.rotation);
             switch (playerAnimation.currentlyFacing)
@@ -46,7 +46,7 @@ public class ProjectileAbility : MonoBehaviour
     }
     public void shootAdvanceProjectile()
     {
-        if (this.GetComponent<PlayerMana>().mana > 0)
+        if (this.GetComponent<PlayerMana>().currentMana > 0)
         {
             this.GetComponent<PlayerMana>().ConsumeMana();
             GameObject searing_ray = Instantiate(projectile, firePosition.position, firePosition.rotation);
