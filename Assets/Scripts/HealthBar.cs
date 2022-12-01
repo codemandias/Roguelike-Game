@@ -8,7 +8,6 @@ public class HealthBar : MonoBehaviour
     public Slider healthSlider;
     
     private void Start() {
-        healthSlider = GetComponent<Slider>();
     }
 
     public void setMaxHealth(int maxHealth) {
