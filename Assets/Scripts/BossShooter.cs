@@ -26,9 +26,11 @@ public class BossShooter : MonoBehaviour
        yield return new WaitForSeconds(time);
         if (player != null)
         {
-            GameObject fire = Instantiate(projectile, transform.position, Quaternion.identity);
-            Vector2 direction = (player.position - transform.position).normalized;
-            fire.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            if(Vector2.Distance(player.position, transform.position) < 10) {
+                GameObject fire = Instantiate(projectile, transform.position, Quaternion.identity);
+                Vector2 direction = (player.position - transform.position).normalized;
+                fire.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            }
             StartCoroutine(AttackPlayer());
         }
     }

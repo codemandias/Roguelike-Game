@@ -155,6 +155,6 @@ public class PopulateLevel : MonoBehaviour {
         exitPortal.transform.position = center;
         exitPortal.transform.Translate(0, 0, -1);
 
-        exitPortal.SetActive(false);
+        exitPortal.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
