@@ -6,6 +6,7 @@ using UnityEngine;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 /*
 Title: Unity 2D Procedural Dungoen Tutorial
@@ -42,7 +43,11 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     }
 
     protected override void RunProceduralGeneration() {
-        CreateRooms();
+        if(floorLevel <= 2) {
+            CreateRooms();
+        } else {
+            SceneManager.LoadScene("Win");
+        }
     }
 
     private void CreateRooms() {
