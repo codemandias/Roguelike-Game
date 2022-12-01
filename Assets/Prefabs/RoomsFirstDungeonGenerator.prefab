@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemapVisualizer: {fileID: 0}
-  startPos: {x: -182, y: -170}
+  startPos: {x: -175, y: -137}
+  floorLevel: 0
   minRoomWidth: 35
   minRoomHeight: 35
   dungeonWidth: 256
@@ -67,41 +68,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomsList:
-  - m_Position: {x: 278, y: -30, z: 0}
+  - m_Position: {x: -30, y: 278, z: 0}
     m_Size: {x: 60, y: 60, z: 0}
   - m_Position: {x: -15, y: -15, z: 0}
     m_Size: {x: 30, y: 30, z: 0}
-  - m_Position: {x: -116, y: -36, z: 0}
-    m_Size: {x: 56, y: 55, z: 0}
-  - m_Position: {x: -116, y: 19, z: 0}
-    m_Size: {x: 56, y: 42, z: 0}
-  - m_Position: {x: -116, y: -195, z: 0}
-    m_Size: {x: 56, y: 36, z: 0}
-  - m_Position: {x: -116, y: -143, z: 0}
-    m_Size: {x: 56, y: 65, z: 0}
-  - m_Position: {x: 59, y: -177, z: 0}
-    m_Size: {x: 40, y: 67, z: 0}
-  - m_Position: {x: 99, y: -177, z: 0}
-    m_Size: {x: 41, y: 67, z: 0}
-  - m_Position: {x: 59, y: -108, z: 0}
-    m_Size: {x: 60, y: 49, z: 0}
-  - m_Position: {x: 59, y: -31, z: 0}
-    m_Size: {x: 63, y: 64, z: 0}
-  - m_Position: {x: 22, y: -132, z: 0}
-    m_Size: {x: 37, y: 65, z: 0}
-  - m_Position: {x: 22, y: -67, z: 0}
-    m_Size: {x: 37, y: 62, z: 0}
-  - m_Position: {x: 22, y: -5, z: 0}
-    m_Size: {x: 37, y: 51, z: 0}
-  - m_Position: {x: -37, y: -144, z: 0}
-    m_Size: {x: 59, y: 38, z: 0}
-  - m_Position: {x: -37, y: -106, z: 0}
-    m_Size: {x: 59, y: 43, z: 0}
-  - m_Position: {x: -37, y: -63, z: 0}
-    m_Size: {x: 59, y: 59, z: 0}
+  - m_Position: {x: 58, y: -45, z: 0}
+    m_Size: {x: 45, y: 35, z: 0}
+  - m_Position: {x: 103, y: 144, z: 0}
+    m_Size: {x: 41, y: 65, z: 0}
+  - m_Position: {x: -112, y: 81, z: 0}
+    m_Size: {x: 57, y: 47, z: 0}
+  - m_Position: {x: -112, y: -45, z: 0}
+    m_Size: {x: 52, y: 35, z: 0}
+  - m_Position: {x: -60, y: -45, z: 0}
+    m_Size: {x: 42, y: 35, z: 0}
+  - m_Position: {x: -112, y: -10, z: 0}
+    m_Size: {x: 57, y: 44, z: 0}
+  - m_Position: {x: -112, y: 152, z: 0}
+    m_Size: {x: 57, y: 59, z: 0}
+  - m_Position: {x: 52, y: -10, z: 0}
+    m_Size: {x: 41, y: 55, z: 0}
+  - m_Position: {x: 103, y: -21, z: 0}
+    m_Size: {x: 41, y: 44, z: 0}
+  - m_Position: {x: -55, y: 143, z: 0}
+    m_Size: {x: 39, y: 68, z: 0}
+  - m_Position: {x: -55, y: 102, z: 0}
+    m_Size: {x: 39, y: 41, z: 0}
+  - m_Position: {x: 52, y: 45, z: 0}
+    m_Size: {x: 41, y: 41, z: 0}
+  - m_Position: {x: 52, y: 86, z: 0}
+    m_Size: {x: 41, y: 51, z: 0}
+  - m_Position: {x: 52, y: 137, z: 0}
+    m_Size: {x: 41, y: 54, z: 0}
+  - m_Position: {x: 103, y: 23, z: 0}
+    m_Size: {x: 41, y: 59, z: 0}
+  - m_Position: {x: -16, y: 150, z: 0}
+    m_Size: {x: 68, y: 49, z: 0}
+  - m_Position: {x: -16, y: 114, z: 0}
+    m_Size: {x: 68, y: 36, z: 0}
+  - m_Position: {x: -55, y: 37, z: 0}
+    m_Size: {x: 39, y: 41, z: 0}
+  - m_Position: {x: -16, y: 42, z: 0}
+    m_Size: {x: 68, y: 53, z: 0}
   environment: {fileID: 0}
+  enemyPlane: {fileID: 0}
+  player: {fileID: 0}
   generationOffset: 4
+  floorLevel: 0
   sceneryDensity: 0.25
+  enemyDensity: 0.5
   alter: {fileID: 4781987910715124873, guid: 364f1991f678179459f76fe64658208a, type: 3}
   items:
   - {fileID: 4097804600723735672, guid: a97c4a9fabd6b604986cd52a6376975e, type: 3}
@@ -116,9 +131,12 @@ MonoBehaviour:
   - {fileID: 321164969674553674, guid: 50b979ded1e276646bb91903d38448a6, type: 3}
   - {fileID: 6098131945809329213, guid: 85a79fe9aec13bb438592edd9772bc1a, type: 3}
   scenery:
-  - {fileID: 8306482028603883089, guid: 6a344848c045aa4488155e88b3841809, type: 3}
   - {fileID: 7568712502929694653, guid: cf69d5a9e77ec5645afb1294c99f61c7, type: 3}
   - {fileID: 7568712502929694653, guid: 057eed8454ddf0640b6b284e8a1f7213, type: 3}
   - {fileID: 7568712502929694653, guid: a228030eec55c8a438ae2e540dfb5f8a, type: 3}
   traps: []
-  enemies: []
+  enemies:
+  - {fileID: 462920575366132141, guid: 0e287d5c1a8ec66478f685db6b4d505f, type: 3}
+  - {fileID: 4683618290818547481, guid: a0a868e708dbf22479a2bd67243563c0, type: 3}
+  - {fileID: 6241647725333543593, guid: 5e0216ff45f4200498e6babd47021984, type: 3}
+  - {fileID: 1605901743936410459, guid: b7a32bae4b760a942993f24690070316, type: 3}

@@ -26,6 +26,8 @@ public class SpaceBot : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindWithTag("Player").transform;
+
+        projectileAbility = target.gameObject.GetComponentInChildren<ProjectileAbility>();
     }
 
     // Update is called once per frame

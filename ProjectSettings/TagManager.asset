@@ -10,6 +10,7 @@ TagManager:
   - Item
   - BotEnemy
   - BossEnemy
+  - Collectable
   layers:
   - Default
   - TransparentFX
