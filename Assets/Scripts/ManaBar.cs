@@ -8,7 +8,6 @@ public class ManaBar : MonoBehaviour
     public Slider manaSlider;
     
     private void Start() {
-        manaSlider = GetComponent<Slider>();
     }
 
     public void setMaxMana(int maxMana) {
