@@ -23,12 +23,9 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // TODO: Begin new run
-            Destroy(gameObject);
+            
         }
-/*        if (Input.GetKeyDown(KeyCode.Space)) {
-            Damage(1);
-            Debug.Log(currentHealth);
-        }*/
+
     }
     public void Damage(int damage)
     {

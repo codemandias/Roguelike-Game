@@ -19,7 +19,6 @@ public class BossProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("test");
         switch (collision.gameObject.tag)
         {
             case "Player":
