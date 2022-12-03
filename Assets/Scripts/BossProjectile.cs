@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
 {
-    public int damage;
+    public int damage = 2;
     // Start is called before the first frame update
     void Start()
     {

@@ -9,7 +9,7 @@ public class BossControl : MonoBehaviour
     public float minDistance = 5.0f;
     public bool targetCollision = false;
     public float speed = 2.0f;
-    public int health = 5;
+    public int health = 10;
     private Animator anim;
     private Rigidbody rb;
     private Vector3 lastPosition;

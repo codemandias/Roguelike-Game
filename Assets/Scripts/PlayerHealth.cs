@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Generate a new run
-            SceneManager.LoadScene("SpaceShipGeneration");
+            SceneManager.LoadScene("Level1SpaceShip");
         }
 
     }
