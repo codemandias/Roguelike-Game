@@ -66,7 +66,7 @@ public class PopulateLevel : MonoBehaviour {
             Vector3 center = roomsList[i].center;
 
             // There should be about 1 enemy for every 200 tiles
-            int numbersOfEnemies = (int)((roomsList[i].size.x * roomsList[i].size.y) / 500 * enemyDensity);
+            int numbersOfEnemies = (int)(roomsList[i].size.x * roomsList[i].size.y / 500 * enemyDensity * (floorLevel + 1));
 
             for(int j = 0; j < numbersOfEnemies; j++) {
                 GameObject obj = Instantiate(enemies[Random.Range(0, enemies.Length)], enemyPlane.transform);

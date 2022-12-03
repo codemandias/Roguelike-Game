@@ -27,5 +27,9 @@ public class SabreHitbox : MonoBehaviour
         {
             collision.gameObject.GetComponent<SpaceBot>().Damage(1);
         }
+        if (collision.gameObject.CompareTag("BossEnemy"))
+        {
+            collision.gameObject.GetComponent<BossControl>().Damage(1);
+        }
     }
 }

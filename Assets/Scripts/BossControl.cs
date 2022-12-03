@@ -9,7 +9,7 @@ public class BossControl : MonoBehaviour
     public float minDistance = 5.0f;
     public bool targetCollision = false;
     public float speed = 2.0f;
-    public int health = 5;
+    public int health = 10;
     private Animator anim;
     private Rigidbody rb;
     private Vector3 lastPosition;
@@ -31,15 +31,23 @@ public class BossControl : MonoBehaviour
             int ability;
             level = target.GetComponent<PlayerMovement>().level;
             ability = target.GetComponent<PlayerMovement>().ability ;
-            if (level < 2 || ability < 2) {
-                switch (level)
+            if (ability == 1)
+            {
+                if (level == 1)
                 {
-                    case 1:
-                        target.GetComponent<PlayerMovement>().level = 2;
-                        break;
-                    case 2:
-                        target.GetComponent<PlayerMovement>().ability = 2;
-                        break;
+                    target.GetComponent<PlayerMovement>().level = 2;
+                }
+                else
+                {
+                    target.GetComponent<PlayerMovement>().ability = 2;
+                    target.GetComponent<PlayerMovement>().level = 1;
+                }
+            }
+            else
+            {
+                if (level == 1)
+                {
+                    target.GetComponent<PlayerMovement>().level = 2;
                 }
             }
         }

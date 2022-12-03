@@ -23,7 +23,7 @@ public class AppearWhenBossDies : MonoBehaviour {
 
         foreach(var hitCollider in hitColliders) {
             // If an enemy is within the boundary of the item
-            if(hitCollider.gameObject.CompareTag("Enemy") || hitCollider.gameObject.CompareTag("BotEnemy") || hitCollider.gameObject.CompareTag("BossEnemy")) {
+            if(hitCollider.gameObject.CompareTag("BossEnemy")) {
                 containsEnemy = true; break;
             }
         }

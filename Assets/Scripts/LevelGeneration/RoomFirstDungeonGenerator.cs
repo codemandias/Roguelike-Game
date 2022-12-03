@@ -6,6 +6,7 @@ using UnityEngine;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 /*
 Title: Unity 2D Procedural Dungoen Tutorial
@@ -17,6 +18,7 @@ Date Accessed: November 16th, 2022
 
 public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     public int floorLevel;
+    [SerializeField] private FogOfWar fogOfWar;
 
     //Minimum width of a room in the dungeon
     [SerializeField] private int minRoomWidth = 4;
@@ -37,18 +39,27 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
 
     public void Start() {
-        floorLevel = 0;
         GenerateDungeon();
     }
 
     protected override void RunProceduralGeneration() {
-        CreateRooms();
+        if(floorLevel <= 2) {
+            CreateRooms();
+        } else {
+            SceneManager.LoadScene("Win");
+        }
     }
 
     private void CreateRooms() {
         startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
+        List<BoundsInt> roomsList;
 
-        var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+        if(floorLevel == 2) {
+            roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int((int)(dungeonWidth*1.5f), (int)(dungeonHeight*1.5f), 0)), (int)(minRoomWidth * 1.5f), (int)(minRoomHeight * 1.5));
+            fogOfWar.isActive = true;
+        } else {
+            roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+        }
 
         BoundsInt bossRoom = createBossRoom();
         BoundsInt startingRoom = createStartingRoom();
