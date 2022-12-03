@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Level3SpaceShip.unity
+    guid: 3087ec5d9b5c7924abb21659124e5b0a
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: fc189300970adbf408855410e4800f22
+  - enabled: 1
+    path: Assets/Scenes/Level1SpaceShip.unity
+    guid: 612390fda92f5fa429a7e9486ddc4b7e
+  - enabled: 1
+    path: Assets/Scenes/Level2SpaceShip.unity
+    guid: 687145bed74ab8d41a75eb63f6e1308b
   m_configObjects: {}

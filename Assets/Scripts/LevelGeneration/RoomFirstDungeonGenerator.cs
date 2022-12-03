@@ -38,7 +38,6 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
 
     public void Start() {
-        floorLevel = 0;
         GenerateDungeon();
     }
 
