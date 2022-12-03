@@ -51,8 +51,13 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
     private void CreateRooms() {
         startPos = new Vector2Int(Random.Range(-dungeonWidth + minRoomWidth, -minRoomWidth), Random.Range(-dungeonHeight + minRoomHeight, -minRoomHeight));
+        List<BoundsInt> roomsList;
 
-        var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+        if(floorLevel == 2) {
+            roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int((int)(dungeonWidth*1.5f), (int)(dungeonHeight*1.5f), 0)), (int)(minRoomWidth * 1.5f), (int)(minRoomHeight * 1.5));
+        } else {
+            roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+        }
 
         BoundsInt bossRoom = createBossRoom();
         BoundsInt startingRoom = createStartingRoom();
