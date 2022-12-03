@@ -18,6 +18,7 @@ Date Accessed: November 16th, 2022
 
 public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
     public int floorLevel;
+    [SerializeField] private FogOfWar fogOfWar;
 
     //Minimum width of a room in the dungeon
     [SerializeField] private int minRoomWidth = 4;
@@ -55,6 +56,7 @@ public class RoomFirstDungeonGenerator : AbstractDungeonGenerator {
 
         if(floorLevel == 2) {
             roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int((int)(dungeonWidth*1.5f), (int)(dungeonHeight*1.5f), 0)), (int)(minRoomWidth * 1.5f), (int)(minRoomHeight * 1.5));
+            fogOfWar.isActive = true;
         } else {
             roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPos, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
         }
