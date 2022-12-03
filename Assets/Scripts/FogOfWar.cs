@@ -11,6 +11,7 @@ public class FogOfWar : MonoBehaviour {
 
     [SerializeField] private GameObject sightQuad;
     [SerializeField] private GameObject shadowQuad;
+    [SerializeField] private FogOfWar fogOfWar;
     [SerializeField] private float sightDistance;
     [SerializeField, Min(MIN_ANGLE)] private float angle = 15;
 
