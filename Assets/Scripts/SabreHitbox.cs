@@ -6,9 +6,10 @@ public class SabreHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    public int damage;
     void Start()
     {
-        
+        damage = 1;
     }
 
     // Update is called once per frame
@@ -21,15 +22,15 @@ public class SabreHitbox : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyControl>().Damage(1);
+            collision.gameObject.GetComponent<EnemyControl>().Damage(damage);
         }
         if (collision.gameObject.CompareTag("BotEnemy"))
         {
-            collision.gameObject.GetComponent<SpaceBot>().Damage(1);
+            collision.gameObject.GetComponent<SpaceBot>().Damage(damage);
         }
         if (collision.gameObject.CompareTag("BossEnemy"))
         {
-            collision.gameObject.GetComponent<BossControl>().Damage(1);
+            collision.gameObject.GetComponent<BossControl>().Damage(damage);
         }
     }
 }

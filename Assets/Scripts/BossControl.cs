@@ -17,6 +17,7 @@ public class BossControl : MonoBehaviour
 
     void Start()
     {
+        health = 10;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindWithTag("Player").transform;
